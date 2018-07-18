@@ -1,0 +1,214 @@
+.the-search-container{
+    --color-text: #fff;
+	--color-link: #f0f0f0;
+	--color-link-hover: #fff;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+	min-height: 300px;
+    width: 100%;
+    height: 2000px;
+    min-width: 1900px;
+	color: #fff;
+	color: var(--color-text);
+	background: linear-gradient(115deg, rgb(255, 235, 148) 5%,rgb(255, 146, 197) 95%);
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+    vertical-align: baseline;
+    position: relative;
+}
+
+.search-box{
+    width: 100%;
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+    padding-top: 100px;
+    padding-right: 670px;
+    padding-bottom: 50px;
+    padding-left: 670px;
+    position: absolute;
+    top: 100px;
+    text-align: center;
+}
+
+.search-input{
+    width: 460px;
+    border: 1px solid #e2e2e2;
+    font-size: 20px;
+    color: gray;
+    height: 50px;
+    float: left;
+    background-image: url(file:///F:/%E5%89%8D%E7%AB%AF/m_test/images/search.png);
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position:5px center;
+    padding:0 0 0 40px;
+}
+.search-button{
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    float: left;
+    background: rgb(255, 255, 255);
+    color: rgb(10, 10, 10);
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    transition:400ms ease all;
+    outline:none;
+}
+
+.select-box{
+    font-family: 'Microsoft YaHei';
+    width: 100%;
+    font-size: 14px;
+    padding-right: 200px;
+    padding-left: 250px;
+    position: absolute;
+    top: 300px;
+    margin: 10px 0px 10px 0px;
+    /* border-top: 1px dotted black;
+    border-bottom: 1px dotted black; */
+    transition:400ms ease all;
+}
+.select-box:hover{
+	background-color: #f1f1f1
+}
+
+.select-list{
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+    padding:10px 10px 10px 470px;
+    color: black;
+}
+
+.project-box{
+    width: 100%;
+    height: 1440px;
+    font-family: 'Microsoft YaHei';
+    font-size: 14px;
+    margin: 30px auto;
+    padding-top: 50px;
+    padding-right: 200px;
+    padding-bottom: 50px;
+    padding-left: 200px;
+    position: absolute;
+    top: 450px;
+}
+
+.radio-label{
+    padding:0px 20px 0px 0px;
+}
+
+.radio-select{
+    padding:0px 5px 0px 5px;
+}
+
+
+
+
+.project{
+    border: 1px solid blue;
+    width: 23%;
+    height: 400px;
+    margin: 10px 8px 10px 8px;
+    float: left;
+    background-color: rgb(255, 250, 250); 
+    opacity: 1.0;
+}
+.project:hover{
+    opacity: 1.0;
+}
+
+
+.project-image{
+    width: 100%;
+    height: 50%;
+    border-bottom: 1px solid;
+}
+
+.cover-image{
+    width: 100%;
+    height: 100%;
+}
+
+.title{
+    width: 100%;
+    height:50px;
+    text-align: center;
+    float:top;
+    font-size: 15px;
+    color: rgb(68, 2, 122);
+    padding: 10px 30px 10px 30px;
+}
+
+.General-information{
+    width: 100%;
+    height: 60px;
+    text-align: left;
+    font-size: 10px;
+    word-wrap:break-word;
+    word-break:break-all;
+    padding: 5px 5px 5px 5px;
+    color: gray;
+    text-indent: 2em;
+    border-top: 1px dotted black;
+    border-bottom: 1px dotted black;
+}
+
+.labels{
+    width: 100%;
+    height: 30px;
+    color: gray;
+    text-align: center;
+    padding: 5px 20px 5px 20px;
+    border-bottom:  1px dotted black;
+    line-height: 20px;
+}
+
+
+.main-information{
+    width: 100%;
+    height: 60px;
+}
+
+.oneofthree-info{
+    width: 33%;
+    height: 60px;
+    float: left;
+    padding: 5px 1% 5px 1%;
+    text-align: center;
+    line-height: 25px;
+}
+
+
+.search-button:hover{
+    background:rgb(0, 204, 255);
+    color:rgb(255, 255, 255);
+
+  }
+  .search-button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: rgb(57, 120, 255);
+    transition:1800ms ease all;
+
+  }
+  .search-button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+
+  }
+  .search-button:hover:before,button:hover:after{
+    width:100%;
+    transition:1800ms ease all;
+  }

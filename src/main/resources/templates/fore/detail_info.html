@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>琦琦众筹</title>
+
+ 
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" >  
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js" ></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/guide.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Detail_info.css}">
+
+
+    <link href='https://fonts.googleapis.com/css?family=Vollkorn|Lato:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/demo.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        
+    <script th:src="@{/js/jquery.min.background.red.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/float_menu.css}">
+    <script type="text/javascript" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/menu.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/css_slider/responsiveslides.css}">
+
+    <link rel="stylesheet" th:href="@{/css_slider/style.css}">
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":["tsina","qzone","weixin","sqq","tqq","renren","tieba"],"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"250"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>    
+
+    <script type="text/javascript" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/responsiveslides.min.js}"></script>
+    <script type="text/javascript">
+        // You can also use "$(window).load(function() {"
+        $(function () {
+
+        // Slideshow 1
+        $("#slider1").responsiveSlides({
+        maxwidth: 1200,
+        speed: 800
+        });
+
+        // Slideshow 2
+        $("#slider2").responsiveSlides({
+        auto: false,
+        pager: true,
+        speed: 300,
+        maxwidth: 540
+        });
+
+        // Slideshow 3
+        $("#slider3").responsiveSlides({
+        manualControls: '#slider3-pager',
+        maxwidth: 540
+        });
+
+        // Slideshow 4
+        $("#slider4").responsiveSlides({
+        auto: false,
+        pager: false,
+        nav: true,
+        speed: 500,
+        namespace: "callbacks",
+        before: function () {
+            $('.events').append("<li>before event fired.</li>");
+        },
+        after: function () {
+            $('.events').append("<li>after event fired.</li>");
+        }
+        });
+
+        });
+    </script>
+
+<!-- jquery-validator -->
+<script type="text/javascript"
+	th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+<!-- layer -->
+<script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+<!-- md5.js -->
+<script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+<!-- common.js -->
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<!-- bootstrap -->
+</head>
+<script>
+	function exit(){
+		$.ajax({
+			url:"/login/loginOut",
+			type:"POST",
+			data:{},
+			success:function(data){
+				if(data.code == 0)
+					window.location.href="/fore/index";
+				else{
+					layer.msg("未知错误");
+				}
+			},
+			error:function(){
+				layer.msg("未知错误");
+			}
+		});
+	}
+</script>
+<script th:inline="javascript">  
+	$(document).ready(function(){  
+		var messageNum = /*[[${messageNum}]]*/;
+		var username = /*[[${flag}]]*/;
+		if(username != "unlogin"){  //已登录状态
+			document.getElementById("div_button").style.display="none";
+			document.getElementById("div_head_image").style.display="inline";
+		}
+		else{
+			document.getElementById("div_head_image").style.display="none";
+			document.getElementById("div_button").style.display="inline";
+		}
+		if(messageNum == 0){
+			document.getElementById("head_message_num").style.display="none";
+			document.getElementById("message_num").style.display="none";
+		}
+	});
+	$(document).ready(function(){
+		$("#btn_comment").click(function(){
+			var content = $("#txt_comment").val();  //评论的内容
+			var date = new Date().toLocaleDateString();
+			var username = /*[[${flag}]]*/;
+			var floor = $("#div_comment").children("div").length+1;
+			var comment = '<div class="detail-content-textareas-comments-comment">'+
+            '<div class="comment-head">'+
+            '<div class="comment-head-image">'+
+                '<img style="width: 100%;height: 100%;" src="/img/head.png" class="round_icon"  alt="">'+
+            '</div>'+
+            '<div class="comment-name">'+
+                username+
+            '</div>'+
+        '</div>'+
+        '<div class="comment-content">'+	
+        	'<div class="comment-content-content">'+
+        	content+
+        	'</div>'+
+        '</div>'+
+        '<div class="comment-time">'+
+            date+
+        '</div>'+
+        '<div class="comment-level">'+
+            '#'+ floor+
+        '</div>'+
+    '</div>';
+    $("#div_comment").append(comment);
+			});
+    });
+	function addComment(){
+		var username = /*[[${flag}]]*/;
+		if(username != "unlogin"){
+			if(document.getElementById("txt_comment").style.display=="none"){
+				document.getElementById("txt_comment").style.display="inline";
+				document.getElementById("btn_comment").style.display="inline";
+			}
+			else{
+				document.getElementById("txt_comment").style.display="none";
+				document.getElementById("btn_comment").style.display="none";
+			}
+		}
+		else{
+			layer.msg("请先登录");
+		}
+	}
+	function toPay(){
+		var username = /*[[${flag}]]*/;
+		if(username != "unlogin"){
+			document.getElementById("txt_comment").style.display="inline";
+			document.getElementById("btn_comment").style.display="inline";
+		}
+		else{
+			layer.msg("请先登录");
+		}
+	}
+	function submitComment(){
+		//异步提交数据
+		var username = /*[[${flag}]]*/;
+		var pid = /*[[${project.id}]]*/;
+		var userId = /*[[${userId}]]*/;
+		var content = $("#txt_comment").val();
+		if(content!=""){
+			$.ajax({
+				//异步传输
+				url: "/detail/submitComment",
+				type:"POST",
+				data:{
+					projectId:pid,
+					userId:userId,
+					content : $("#txt_comment").val()
+				},
+				success: function(data){
+					if(data.code == 0){
+						//隐藏按钮
+						document.getElementById("txt_comment").style.display="none";
+						document.getElementById("btn_comment").style.display="none";
+					}
+					else{
+						layer.msg(data.msg);
+					}
+				},
+				error:function(){
+				}
+				});
+			
+		}
+		else{
+			layer.msg("请输入内容")
+		}
+		
+	}
+</script>
+<script type="text/javascript">
+	function displayPay(){
+		document.getElementById("pay").style.display = "block";
+	}
+	function exitPay(){
+		document.getElementById("pay").style.display = "none";
+	}
+	
+	
+	
+</script>
+<body>
+
+    <div class="detail-content">
+            <header role="banner" class="probootstrap-header">
+                <div class="container">
+                    <a href="/fore/index" class="probootstrap-logo">QAQ CrowdFunding<span></span></a>
+                    
+                    <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+                    <div class="mobile-menu-overlay"></div>
+            
+                    <nav role="navigation" class="probootstrap-nav hidden-xs">
+                         <div class="button_su">
+                            <span class="su_button_circle">
+                            </span>
+                            <a href="/launch/toLaunch" class="button_su_inner">
+                                <span class="button_text_container">
+                                     发起众筹
+                                </span>
+                            </a>
+                        </div>
+                    </nav>
+                    <nav role="navigation" class="probootstrap-nav_login hidden-xs">
+                            <div class="button_su_login" id="div_button">
+                               <span class="su_button_circle">
+                               </span>
+                               <a href="#" class="button_su_inner_login">
+                                   <span class="button_text_container" onclick = "window.location.href='/login/toLogin';">
+                                        登录
+                                   </span>
+                               </a>
+                           </div>
+                    </nav>
+                    <div class="head-image" id="div_head_image"  onclick = "window.location.href='/fore/home'">
+                            <img th:src="@{/img/head.png}" class="round_icon"  alt="" style="cursor:pointer">
+                            <div class="news-alert-head" id="head_message_num" th:text="${messageNum}">
+           			 		</div>
+                            <div class="head-image-table">
+	                            <div class="head-image-nickname" th:text="${flag}" style="cursor:pointer"></div>
+	                            <div class="head-image-button" style="cursor:pointer"   >个人信息</div>
+	                            <div class="head-image-button" style="cursor:pointer"  >账户详情</div>
+	                            <div class="head-image-button" style="cursor:pointer" >我的订单</div>
+	                            <div class="head-image-button" style="cursor:pointer" >我的发起</div>
+	                            <div class="head-image-button" style="cursor:pointer" >设置</div>
+	                            <div class="head-image-button" style="cursor:pointer" >
+                            		消息
+                          			<div class="news-alert-news" id="message_num" th:text="${messageNum}">
+                               		 </div>
+	                            </div>
+	                            <div class="head-image-button" style="cursor:pointer" onclick="exit()">退出</div>
+
+	                        </div>
+                    </div>             
+                    <div class="search d7">
+                        <form action = "/search/searchKeyword" method = "get">
+                            <input type="text" name = "keyword" placeholder="搜索从这里开始..."/>
+                            <button type="submit"></button>
+                        </form>
+                    </div>
+ 
+                    
+                </div>
+        </header>
+            <div id="item1" class="detail-content-title" th:text="${project.name}">
+            </div>
+            <div class="detail-content-coverandothers">
+                <div class="detail-content-coverimage">
+                    <img th:src="${project.cover}" class="detail-content-coverimage-cover" alt="">
+                </div>
+                <div class="detail-content-others" th:with="percent=${project.currentMoney}/${project.targetMoney}">
+                    <div class="detail-content-others-days">
+                        截止日期
+                    </div>   
+                    <div class="detail-content-others-moneys">
+                        已筹款数目
+                    </div>    
+                    <div class="detail-content-others-state">
+                        目标金额
+                    </div>  
+                    <div class="detail-content-others-days-value" th:text="${#dates.format(project.endTime,'yyyy-MM-dd')}">
+                    </div>  
+                    <div class="detail-content-others-moneys-value" th:text="￥+${project.currentMoney}">
+                        
+                    </div> 
+                    <div class="detail-content-others-state-value" th:text="￥+${project.targetMoney}">
+                    </div> 
+                    <canvas class="thewater" id="c"></canvas>
+                    <input type="text" id="r" th:value="${#numbers.formatDecimal(percent * 100, 1, 1)}" style="display: none">
+                    <nav role="navigation" class="probootstrap-nav_subscribe hidden-xs">
+                        <div class="button_su_subscribe" th:if = "${project.state==21 or project.state == 22}">
+                            <span class="su_button_circle">
+                            </span>
+                            <a onclick = "displayPay()" class="button_su_inner_subscribe" style="cursor:pointer">
+                                <span class="button_text_container">
+                                    立即支持
+                                </span>
+                            </a>
+                        </div>
+                    </nav> 
+                </div>
+            </div>
+            <div  id="item2" class="detail-content-images" >
+                	<ul class="rslides" id="slider1" >
+                        <li th:each="im:${image}"><img th:src="${im.name}" alt=""></li>
+                    </ul>
+            </div>
+            <div class="detail-content-textareas">
+
+                <div  id="item3" class="detail-content-textareas-titles">项目目的</div>
+                
+                 <div class="detail-content-textareas-content" th:text="${project.purpose}">
+                </div>
+
+                <div  id="item4" class="detail-content-textareas-titles">项目故事</div>
+                <div class="detail-content-textareas-content" th:text="${project.coverStory}">
+                </div>
+
+                <div  id="item5" class="detail-content-textareas-titles">项目回报</div>
+                <div class="detail-content-textareas-content" th:text="${rewords.returnDetail}">
+                </div>
+
+                <div  id="item6" class="detail-content-textareas-titles">评论</div>
+                <div class="detail-content-textareas-comments" id="div_comment"> 
+                    <div class="detail-content-textareas-comments-comment" th:each="cmt,index:${comment}">
+                        <div class="comment-head">
+                            <div class="comment-head-image">
+                                <img style="width: 100%;height: 100%;" th:src="@{/img/head.png}" class="round_icon"  alt="">
+                            </div>   
+                            <div class="comment-name" th:text="${cmt.username}">
+                            </div>  
+                        </div>
+                        <div class="comment-content">	
+                        	<div class="comment-content-content" th:text="${cmt.content}">
+                        	</div>
+                           
+                        </div>
+                        <div class="comment-time" th:text="${cmt.time}">
+                        </div>
+                        <div class="comment-level" th:text="'#'+${index.count}">
+                        </div>
+                    </div>
+                </div>  
+                <div class="small-introductions-buttons">
+                    <button class="xuanfu-button" onclick = "addComment()">添加评论</button>
+                </div>
+                <div class="detail-content-input" id="div_add_comment" >
+                    <input id="txt_comment" class="detail-content-input-input" name="firstname" style="display: none">
+                    <div id="btn_comment" name="btn_comment" class="detail-content-input-button" style="display: none;cursor:pointer" onclick="submitComment()"> 提交 </div>
+                </div>
+
+                <div  id="item7" class="detail-content-textareas-titles">支持名单</div>
+                <div class="detail-content-textareas-supports">
+                    <div class="detail-content-textareas-supports-support" th:each="spt:${support}">
+                        <div class="support-name" th:text="${spt.username}">
+                        </div>
+                        <div class="support-amount" th:text="￥+${spt.money}">
+                        </div>
+                        <div class="support-date" th:text="${spt.date}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    </div>
+
+    <div id="menu">
+        <ul>
+            <li><a href="#item1">项目概述</a></li>
+            <li><a href="#item2">项目图片</a></li>
+            <li><a href="#item3">项目目的</a></li>
+            <li><a href="#item4">项目故事</a></li>
+            <li><a href="#item5">项目回报</a></li>
+            <li><a href="#item6">评论</a></li>
+            <li><a href="#item7">回报名单</a></li>
+        </ul>
+    </div>
+    
+      <form action="/pay/newAalipay" method="post" id = "payForm" name = "payForm">
+    <div class="detail-pay" id="pay"  >
+        <div class="detail-pay-titleandexit">
+            支付
+            <div class="detail-pay-exit">
+                <img th:src="@{/img/exit.jpg}" alt="" onclick="exitPay()" style="cursor:pointer">
+            </div>
+        </div>
+     
+        <div class="detail-pay-moneyinput">
+            <div class="detail-pay-money-title" >请输入金额</div>
+            <input class="detail-pay-money-input" id="money" name="money">
+            <input th:type = "hidden" id = "projectId"  name="projectId" th:value = "${project.id}"></input>
+             <input th:type = "hidden" id = "orderType"  name="orderType" th:value = "-1"></input>
+        </div>
+        <div class="detail-pay-ways">
+            <div class="detail-pay-way" id="zhifubao">
+                <img class="detail-pay-way-logo" th:src="@{/img/zhifu.jpg}" alt="" style="cursor:pointer">
+                <div class="detail-pay-way-name"> 支付宝支付</div>
+            </div>
+            <div class="detail-pay-way"  id="weixin">
+                <img class="detail-pay-way-logo" th:src="@{/img/weixin.png}" alt="" style="cursor:pointer">
+                <div class="detail-pay-way-name"> 微信支付</div>
+            </div>
+            <div class="detail-pay-way"  id="yue">
+                <img class="detail-pay-way-logo" th:src="@{/img/yue.jpg}" alt="" style="cursor:pointer">
+                <div class="detail-pay-way-name"> 账户余额支付</div>
+            </div>
+
+        </div>
+        <div class="detail-pay-ensure" style="cursor:pointer" onclick="submitPay()">
+            确认支付
+        </div>
+    
+    </div>
+        </form>
+    
+    
+<script>
+    var indexPay=-1;
+    $(function(){
+    $(".detail-pay-way").click(function (){
+        $(this).css("border","3px solid red");
+        var id = $(this).attr("id");
+        switch(id){
+        case "zhifubao":
+        	indexPay = 1;
+        	break;
+        case "weixin":
+        	indexPay = 2;
+        	break;
+        case "yue":
+        	indexPay = 3;
+        	break;
+        default:
+        	break;
+        }
+        $("div[class='detail-pay-way']").each(function() {
+            var id2 = $(this).attr("id");
+            if(id != id2){
+                $(this).css("border","1px solid black");
+            }
+        });
+    });
+});
+    function submitPay(){
+
+    	if(indexPay == -1){
+    		layer.msg("请选择支付方式");
+    	}
+    	else{
+    		var money = $("#money").val();
+    		if(money == ""){
+        		layer.msg("请选择金额");
+        	}
+    		else{
+    			document.getElementById("orderType").value = indexPay;
+    			var form =  document.getElementById("payForm");
+    			form.submit();
+            }
+    	}
+    }
+</script>
+    
+    
+    <script>
+            $( ".button_su_inner" ).mouseenter(function(e) {
+                var parentOffset = $(this).offset(); 
+                
+                var relX = e.pageX - parentOffset.left;
+                var relY = e.pageY - parentOffset.top;
+                $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+                $(this).prev(".su_button_circle").removeClass("desplode-circle");
+                $(this).prev(".su_button_circle").addClass("explode-circle");
+            
+            });
+            
+            $( ".button_su_inner" ).mouseleave(function(e) {
+            
+                    var parentOffset = $(this).offset(); 
+            
+                    var relX = e.pageX - parentOffset.left;
+                    var relY = e.pageY - parentOffset.top;
+                    $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+                    $(this).prev(".su_button_circle").removeClass("explode-circle");
+                    $(this).prev(".su_button_circle").addClass("desplode-circle");
+            
+            });
+
+
+            $( ".button_su_inner_subscribe" ).mouseenter(function(e) {
+                var parentOffset = $(this).offset(); 
+                
+                var relX = e.pageX - parentOffset.left;
+                var relY = e.pageY - parentOffset.top;
+                $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+                $(this).prev(".su_button_circle").removeClass("desplode-circle");
+                $(this).prev(".su_button_circle").addClass("explode-circle");
+            
+            });
+            
+            $( ".button_su_inner_subscribe" ).mouseleave(function(e) {
+            
+                    var parentOffset = $(this).offset(); 
+            
+                    var relX = e.pageX - parentOffset.left;
+                    var relY = e.pageY - parentOffset.top;
+                    $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+                    $(this).prev(".su_button_circle").removeClass("explode-circle");
+                    $(this).prev(".su_button_circle").addClass("desplode-circle");
+            
+            });
+    
+    
+            $( ".button_su_inner_login" ).mouseenter(function(e) {
+                var parentOffset = $(this).offset(); 
+                
+                var relX = e.pageX - parentOffset.left;
+                var relY = e.pageY - parentOffset.top;
+                $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+                $(this).prev(".su_button_circle").removeClass("desplode-circle");
+                $(this).prev(".su_button_circle").addClass("explode-circle");
+            
+            });
+    
+    
+            $( ".button_su_inner_login" ).mouseleave(function(e) {
+            
+            var parentOffset = $(this).offset(); 
+        
+            var relX = e.pageX - parentOffset.left;
+            var relY = e.pageY - parentOffset.top;
+            $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+            $(this).prev(".su_button_circle").removeClass("explode-circle");
+            $(this).prev(".su_button_circle").addClass("desplode-circle");
+        
+    });</script>
+
+    <script type="text/javascript">
+    var canvas = document.getElementById('c');
+    var ctx = canvas.getContext('2d');
+    var range = document.getElementById('r');
+   
+    //range控件信息
+    var rangeValue = range.value;
+    var nowRange = 0; //用于做一个临时的range
+   
+    //画布属性
+    var mW = canvas.width = 250;
+    var mH = canvas.height = 250;
+    var lineWidth = 2;
+   
+    //圆属性
+    var r = mH / 2; //圆心
+    var cR = r - 16 * lineWidth; //圆半径
+   
+    //Sin 曲线属性
+    var sX = 0;
+    var sY = mH / 2;
+    var axisLength = mW; //轴长
+    var waveWidth = 0.015 ; //波浪宽度,数越小越宽 
+    var waveHeight = 6; //波浪高度,数越大越高
+    var speed = 0.09; //波浪速度，数越大速度越快
+    var xOffset = 0; //波浪x偏移量
+   
+    ctx.lineWidth = lineWidth;
+   
+    //画圈函数
+    var IsdrawCircled = false;
+    var drawCircle = function(){
+   
+     ctx.beginPath();
+     ctx.strokeStyle = '#1080d0';
+     ctx.arc(r, r, cR+5, 0, 2 * Math.PI);
+     ctx.stroke();
+     ctx.beginPath();
+     ctx.arc(r, r, cR, 0, 2 * Math.PI);
+     ctx.clip();
+   
+    }
+   
+    //画sin 曲线函数
+    var drawSin = function(xOffset){
+     ctx.save();
+   
+     var points=[]; //用于存放绘制Sin曲线的点
+   
+     ctx.beginPath();
+     //在整个轴长上取点
+     for(var x = sX; x < sX + axisLength; x += 20 / axisLength){
+      //此处坐标(x,y)的取点，依靠公式 “振幅高*sin(x*振幅宽 + 振幅偏移量)”
+      var y = -Math.sin((sX + x) * waveWidth + xOffset);
+   
+      var dY = mH * (1 - nowRange / 100 );
+   
+      points.push([x, dY + y * waveHeight]);
+      ctx.lineTo(x, dY + y * waveHeight);  
+     }
+   
+     //封闭路径
+     ctx.lineTo(axisLength, mH);
+     ctx.lineTo(sX, mH);
+     ctx.lineTo(points[0][0],points[0][1]);
+     ctx.fillStyle = '#1c86d1';
+     ctx.fill();
+   
+     ctx.restore();
+    };
+   
+    //写百分比文本函数
+    var drawText = function(){
+     ctx.save();
+   
+     var size = 0.4*cR;
+     ctx.font = size + 'px Microsoft Yahei';
+     ctx.textAlign = 'center';
+     ctx.fillStyle = "rgba(06, 85, 128, 0.8)";
+     ctx.fillText(~~nowRange + '%', r, r + size / 2);
+   
+     ctx.restore();
+    };
+   
+    var render = function(){
+     ctx.clearRect(0, 0, mW, mH);
+   
+     rangeValue = range.value;
+   
+     if(IsdrawCircled == false){
+      drawCircle(); 
+     }
+   
+     if(nowRange <= rangeValue){
+      var tmp = 1;
+      nowRange += tmp;
+     }
+   
+     if(nowRange > rangeValue){
+      var tmp = 1;
+      nowRange -= tmp;
+     }
+   
+     drawSin(xOffset);
+     drawText(); 
+   
+     xOffset += speed;
+     requestAnimationFrame(render);
+    }
+   
+    render();  
+   </script>
+</body>
+
+
+</html>
+

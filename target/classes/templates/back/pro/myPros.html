@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>hello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<script type="text/javascript"
+	th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery-validator -->
+<script type="text/javascript"
+	th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+</head>
+<style>
+.table th, .table td {
+	text-align: center;
+	vertical-align: middle !important;
+}
+</style>
+<script>
+function getCollect(){
+	alert("sdsd");
+}
+</script>
+<body>
+	<div th:replace="/fore/home::header"></div>
+	<div class="panel panel-default  text-center"  >
+ 		<!-- 向面板添加标题容器 -->
+		<div class="panel-heading"  >个人发起项目总览</div>
+		<div class="panel-body">
+			<div class="container ">
+		
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							
+							<th class="col-md-5">项目名</th>
+							<th class="col-md-2">目标额度</th>
+							<th class="col-md-2">当前筹款</th>
+							<th class="col-md-2">状态</th>
+							<th class="col-md-5">操作</th>
+						</tr>
+					</thead>
+					<!-- th:remove被处理时会被删除 -->
+													
+					<tbody th:remove="all-but-first">
+						<tr th:each="pro : ${projects}" th:onclick="'javascript:getCollect('+${pro.id} +')'">	
+							<td><a class="btn btn-link" th:text="${pro.name}"
+								th:href="'/detail/showDetail?projID='+${pro.id}"></a></td>
+							<td
+								th:text="${'￥' + #numbers.formatDecimal(pro.targetMoney, 1, 2)}">2</td>
+							<td
+								th:text="${'￥' + #numbers.formatDecimal(pro.currentMoney, 1, 2)}">3</td>
+							<td th:text="${pro.state}"></td>
+							
+						
+							<td align="center" th:if="${pro.state} == 0">
+							<a class="btn btn-success" 
+							th:href="'/pro/fore/updateState?id='+${pro.id}+'&amp;state=1'">提交</a >
+							</td>
+							<td align="center" th:if="${pro.state} == 1">
+							<a class="btn btn-success" 
+							th:href="''">审核中</a >
+							</td>
+							<td align="center" th:if="${pro.state} == 21"><a
+								class="btn btn-success"  th:href="'/pro/fore/updateState?id='+${pro.id}+'&amp;state=22'">申请延期</a>
+							</td>
+							<td align="center" th:if="${pro.state} == 99"><a
+								class="btn btn-success"  th:href="'/pro/fore/updateState?id='+${pro.id}+'&amp;state=80'">申请解锁</a>
+							</td>
+							<td align="center" th:if="${pro.state} == 31 or ${pro.state} == 40">
+							<a  class="btn btn-success"  
+								th:href="'/pro/fore/updateState?id='+${pro.id}+'&amp;state=41'">申请提款</a>
+							</td>
+							<td align="center" th:if="${pro.state} == 41">
+							<a class="btn btn-success" 
+							th:href="''">提款审核中</a >
+							</td>
+							<td align="center" th:if="${pro.state} == 20"><a
+								class="btn btn-success"  th:href="'/pro/fore/updateState?id='+${pro.id}+'&amp;state=1'">修改</a>
+							</td>
+							<td align="center" th:if="${pro.state} == 5">
+							<a  class="btn btn-success"  
+								th:href="'/pro/fore/updateState?id='+${pro.id}+'&amp;state=6'">确认回报</a>
+							</td>
+							<td align="center" th:if="${pro.state} == 6">
+							<a class="btn btn-success" 
+							th:href="''">已关闭</a >
+							</td>
+		 
+						</tr>
+					 
+					</tbody>
+					
+				</table>
+				 
+			</div>
+		</div>
+
+	</div>
+
+
+
+</body>
+</html>

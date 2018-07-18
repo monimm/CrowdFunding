@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>hello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<script type="text/javascript"
+	th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery-validator -->
+<script type="text/javascript"
+	th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+</head>
+<body>
+
+	<div  th:fragment="page" xmlns:th="http://www.w3.org/1999/xhtml">
+			<nav>
+				<ul class="pagination">
+					<!-- 首页超链： -->
+					<li><th:if test="${!page.hasPreviouse}" class="disabled"></th:if>
+						<!-- aria-label属性用来给当前元素加上的标签描述，接受字符串作为参数。 --> <a
+						th:href="'?start=0'" aria-label="Previous"> <span
+							aria-hidden="true">«</span> <!-- 属性 aria-hidden="true" 用于保持模态窗口不可见，直到触发器被触发为止 -->
+					</a></li>
+
+					<!-- 上一页超链： -->
+					<li th:if ="${page.hasPreviouse}" >
+						<a th:href="'?start='+${page.start-page.count}"
+						aria-label="Previous"> <span aria-hidden="true">‹</span>
+					</a></li>
+							 
+					<!-- 下一页超链： -->
+					<li th:if ="${page.hasNext}"> 
+					<a th:href="'?start='+${page.start+page.count}" aria-label="Next">
+							<span aria-hidden="true">›</span>
+					</a></li>
+
+					<!-- 尾页超链： -->
+					<li><th:if test="${!page.hasNext()}" class="disabled"></th:if>
+						<a th:href="'?start='+${page.last}" aria-label="Next"> <span
+							aria-hidden="true">»</span>
+					</a></li>
+
+				</ul>
+			</nav>
+			
+			</div>
+
+</body>
+</html>

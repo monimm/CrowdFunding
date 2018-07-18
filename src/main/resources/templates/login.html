@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>琦琦众筹</title>
+
+<link rel="shortcut icon" href="" />
+<link rel="bookmark" href="" />
+
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/login_main.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bootstrap/css/login_spe.css}" />
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script th:src="@{/js/login_main.js}"></script>
+
+<!-- jquery-validator -->
+<script type="text/javascript"
+	th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+<!-- layer -->
+<script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+<!-- common.js -->
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+<body
+	style="background: linear-gradient(115deg, rgb(105, 253, 233) 5%, rgb(131, 94, 255) 95%); height: 940px">
+	<!-- 顶部logo -->
+	<header class="header">
+		<div class="header-box">
+			<a href="index.html"><img src="" /></a>
+		</div>
+	</header>
+	<!-- 注册 -->
+	<div id="register" class="content">
+		<div class="content-box1 clearfix">
+			<!-- 左侧-注册框 -->
+			<div class="content-box-fl">
+				<div class="form-header">
+					<div class="form-header-item on">手机注册</div>
+					<div class="form-header-item">邮箱注册</div>
+					<span class="form-header-san"></span>
+				</div>
+				<!-- 手机注册 -->
+				<div class="form-content">
+					<div class="form-content-item">
+						<form action="" name="RegisterByPhoneForm"
+							id="RegisterByPhoneForm">
+							<div class="form-list">
+								<input type="text" class="input" placeholder="请输入用户名"
+									name="username_phone" id="username_phone" th:required="true"
+									autocomplete="off" />
+							</div>
+							<div class="form-list">
+								<input type="text" class="input" placeholder="请输入手机号"
+									name="userphone_phone" id="userphone_phone" th:required="true"
+									autocomplete="off" />
+							</div>
+							<div class="form-list">
+								<input type="password" class="input" placeholder="请输入密码"
+									name="password_phone" id="password_phone" th:required="true"
+									autocomplete="off" />
+							</div>
+							<div class="form-list">
+								<input type="text" class="input" placeholder="请输入验证码"
+									name="txt_getMessage" id="txt_getMessage" /> <input
+									type="button" class="child" value="获取验证码" name="btn_getMessage"
+									id="btn_getMessage" onclick="getMessage()" />
+							</div>
+							<div class="form-ty">
+								注册代表你已同意 <a href="#" style="color: #ed4242">「琦琦众筹用户协议」</a>
+							</div>
+							<div class="form-btn">
+								<input type="submit" class="btn" value="注&nbsp;册"
+									onclick="doRegisterByPhone()" />
+							</div>
+						</form>
+					</div>
+					<!-- 邮箱注册 -->
+					<div class="form-content-item">
+						<form action="" name="RegisterByMailForm" id="RegisterByMailForm">
+							<div class="form-list">
+								<input type="text" class="input" placeholder="请输入用户名"
+									name="username" id="username" th:required="true"
+									autocomplete="off" />
+							</div>
+							<div class="form-list">
+								<input type="text" class="input" placeholder="请输入邮箱地址"
+									name="usermail" id="usermail" th:required="true"
+									autocomplete="off" />
+							</div>
+							<div class="form-list">
+								<input type="password" class="input" placeholder="请输入密码"
+									name="password" id="password" th:required="true"
+									autocomplete="off" />
+							</div>
+							<div class="form-list">
+								<input type="text" class="input" placeholder="请输入验证码" /> <input
+									type="button" class="child" value="获取验证码" />
+							</div>
+							<div class="form-ty">
+								注册代表你已同意 <a href="#" style="color: #ed4242">「琦琦众筹用户协议」</a>
+							</div>
+							<div class="form-btn">
+								<input type="submit" class="btn" value="注&nbsp;册"
+									onclick="doRegister()" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- 右侧-其它登录方式框 -->
+			<div class="content-box-fr">
+				<div class="content-box-text">
+					<h3>访客浏览：</h3>
+					<a href="/fore/index" class="ll-link">返回首页</a>
+					<h3>已有账号：</h3>
+					<a onclick="log_regSwitch(1)" class="ll-link"
+						style="cursor: pointer">直接登录</a>
+					<h3>使用第三方帐号直接登录:</h3>
+					<ul class="content-box-text-link clearfix">
+						<li><a href="#" class="icon-sina" title="使用新浪微博帐号登录"></a></li>
+						<li><a href="#" class="icon-wechat" title="使用微信帐号登录"></a></li>
+						<li><a href="#" class="icon-qq" title="使用腾讯QQ帐号登录"></a></li>
+						<li><a href="#" class="icon-baidu" title="使用百度帐号登录"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 登录 -->
+	<div id="login" class="content">
+		<div class="content-box2 clearfix">
+			<!-- 左侧-登录框 -->
+			<div class="content-box-fl">
+				<div class="form-header">
+					<div class="form-header-item" style="cursor: pointer">直接登录</div>
+					<span class="form-header-san"></span>
+				</div>
+				<!-- 直接登录 -->
+				<div class="form-content">
+					<div class="form-content-item">
+						<form action="" name="loginForm" id="loginForm" method="post">
+							<div class="form-list">
+								<input type="text" class="input" placeholder="请输入用户名/手机号/邮箱"
+									id="username_login" name="username_login" th:required="true"
+									autocomplete="off" />
+							</div>
+							<div class="form-list">
+								<input type="password" class="input" placeholder="请输入密码"
+									id="password_login" name="password_login" th:required="true"
+									autocomplete="off" />
+							</div>
+							<div class="form-pwd">
+								<a href="/changePWD/toChangePWD">忘记密码？</a>
+							</div>
+							<div class="form-btn">
+								<input type="submit" class="btn" value="登&nbsp;录"
+									onclick="login()" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- 右侧-其它登录方式框 -->
+			<div class="content-box-fr">
+				<div class="content-box-text">
+					<h3>访客浏览：</h3>
+					<a href="/fore/index" class="ll-link">返回首页</a>
+					<h3>没有账号:</h3>
+					<a onclick="log_regSwitch(0)" class="ll-link"
+						style="cursor: pointer">立即注册</a>
+					<h3>使用第三方帐号直接登录:</h3>
+					<ul class="content-box-text-link clearfix">
+						<li><a href="#" class="icon-sina" title="使用新浪微博帐号登录"></a></li>
+						<li><a href="#" class="icon-wechat" title="使用微信帐号登录"></a></li>
+						<li><a href="#" class="icon-qq" title="使用腾讯QQ帐号登录"></a></li>
+						<li><a href="#" class="icon-baidu" title="使用百度帐号登录"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	var sms = "";
+	function doRegisterByPhone(){
+		$("#RegisterByPhoneForm").validate({
+			submitHandler : function(form) {
+				registerByPhone();
+			}
+		});
+	}
+	
+	function registerByPhone(){
+		g_showLoading();
+		var code = $("#txt_getMessage").val();
+		if(code == ""){
+			alert("请输入验证码");
+			layer.closeAll();
+		}
+		else{
+			if(sms == code){
+				$.ajax({
+					url: "/login/register",
+					type:"POST",
+					data:{
+						username : $("#username_phone").val(),
+						password : $("#password_phone").val(),
+						usermailOrPhone : $("#userphone_phone").val(),
+						type : 1
+					},
+					success: function(data){
+						if(data.code == 0){
+							layer.msg("注册成功");
+							setTimeout(log_regSwitch(1),3000);
+						}
+						else{
+							layer.msg(data.msg);
+						}
+					},
+					error:function(){
+						layer.closeAll();
+					}
+				});
+			}
+			else{
+				alert("验证码错误");
+				layer.closeAll();
+			}
+		}
+	}
+	
+	function doRegister(){
+		$("#RegisterByMailForm").validate({
+			submitHandler : function(form) {
+				register();
+			}
+		});
+	}
+	function register(){
+		g_showLoading();
+		$.ajax({
+			url : "/login/register",
+			type : "POST",
+			data : {
+				username : $("#username").val(),
+				password : $("#password").val(),
+				usermailOrPhone : $("#usermail").val(),
+				type : 2
+			},
+			success : function(data) {
+				//layer.closeAll();
+				if (data.code == 0) {
+					layer.msg("注册成功");
+					setTimeout(log_regSwitch(1),3000);
+				} else {
+					layer.msg(data.msg);
+				}
+			},
+			error : function() {
+				layer.closeAll();
+			}
+		});
+	}
+	
+	
+	var InterValObj; //timer变量，控制时间
+    var count = 30; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+	function getMessage(){
+    	sendMessage();
+		curCount = count;
+		$("#btn_getMessage").attr("disabled", "true");
+        $("#btn_getMessage").val(curCount + "秒后可重新发送");
+        InterValObj = window.setInterval(SetRemainTime, 1000);
+	}
+    
+
+	//timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btn_getMessage").removeAttr("disabled");//启用按钮
+            $("#btn_getMessage").val("重新发送验证码");
+        }
+        else {
+            curCount--;
+            $("#btn_getMessage").val(curCount + "秒后可重新发送"); 
+        }
+    }
+	function sendMessage(){
+		var phone = $("#userphone_phone").val();
+		if(phone != ""){
+			$.ajax({
+				url : "/login/sendSMS",  //这里需要修改
+				type : "POST",
+				data:{
+					phone:$("#userphone_phone").val()
+				},
+				success:function(data){
+					if(data.code == 0){
+						sms = data.data;
+					}
+					else{
+						layer.msg(data.msg);
+					}
+				},
+				error:function(){
+					layer.closeAll();
+				}
+			})
+		}
+		else{
+			layer.msg("请输入手机号");
+		}
+	}
+</script>
+
+	<script>
+    function login() {
+        $("#loginForm").validate({
+            submitHandler : function(form) {
+                doLogin();
+            }
+        }); 
+    }
+    function doLogin() {
+        g_showLoading();
+
+        $.ajax({
+            url : "/login/login",
+            type : "POST",
+            data : {
+                username : $("#username_login").val(),
+                password : $("#password_login").val()
+            },
+            success : function(data) {
+                //layer.closeAll();
+                if (data.code == 0) {
+                    layer.msg("登陆成功");
+                    if(data.data != "success"){
+                    	var projId = data.data;
+                    	window.location.href = "/detail/showDetail?projID=" + projId;
+                    	return;
+                    }       
+                    setTimeout("window.location.href = '/fore/index'",1000);
+                } else {
+                    layer.msg(data.msg);
+                }
+            },
+            error : function() {
+                //layer.closeAll();
+                alert("server exception");
+            }
+        });
+    }
+</script>
+</body>
+</html>

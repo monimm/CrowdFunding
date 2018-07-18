@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>琦琦众筹</title>
+
+
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/guide_search.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/search.css}" />
+
+<link
+	href='https://fonts.googleapis.com/css?family=Vollkorn|Lato:400,700'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/demo.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+<script src="@{/js/jquery.min.background.red.js}"></script>
+
+
+
+<!-- jquery-validator -->
+<script type="text/javascript"
+	th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+<!-- layer -->
+<script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+
+<!-- common.js -->
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+
+</head>
+<script>
+	function exit(){
+		$.ajax({
+			url:"/login/loginOut",
+			type:"POST",
+			data:{},
+			success:function(data){
+				if(data.code == 0)
+					window.location.href="/fore/index";
+				else{
+					layer.msg("未知错误");
+				}
+			},
+			error:function(){
+				layer.msg("未知错误");
+			}
+		});
+	}
+</script>
+<script th:inline="javascript">  
+$(document).ready(function(){  
+	var messageNum = /*[[${messageNum}]]*/;
+	var username = /*[[${flag}]]*/;
+	if(username != "unlogin"){  //已登录状态
+		document.getElementById("div_button").style.display="none";
+		document.getElementById("div_head_image").style.display="inline";
+	}
+	else{
+		document.getElementById("div_head_image").style.display="none";
+		document.getElementById("div_button").style.display="inline";
+	}
+	if(messageNum == 0){
+		document.getElementById("head_message_num").style.display="none";
+		document.getElementById("message_num").style.display="none";
+	}
+		var searchType = /*[[${init.searchType}]]*/;
+		var searchState = /*[[${init.searchState}]]*/;
+		var searchOrder = /*[[${init.searchOrder}]]*/;
+		switch(searchState){
+		case '0':
+	        $("input:radio[name=searchState][value=0]").attr("checked",true); 
+	        break;
+		case '21':
+	        $("input:radio[name=searchState][value=21]").attr("checked",true); 
+	        break;
+		case '31':
+	        $("input:radio[name=searchState][value=31]").attr("checked",true); 
+	        break;
+		default:
+			 $("input:radio[name=searchState][value=0]").attr("checked",true); 
+        break;
+		}
+		switch(searchOrder){
+		case '0':
+	        $("input:radio[name=searchOrder][value=0]").attr("checked",true); 
+	        break;
+		case '1':
+	        $("input:radio[name=searchOrder][value=1]").attr("checked",true); 
+	        break;
+		case '2':
+	        $("input:radio[name=searchOrder][value=2]").attr("checked",true); 
+	        break;
+		case '3':
+			$("input:radio[name=searchOrder][value=3]").attr("checked",true); 
+	        break;
+		default:
+			 $("input:radio[name=searchOrder][value=0]").attr("checked",true); 
+        break;
+		}
+		
+		switch(searchType){
+		case '0':
+	        $("input:radio[name=searchType][value=0]").attr("checked",true); 
+	        break;
+		case '1':
+	        $("input:radio[name=searchType][value=1]").attr("checked",true);  
+	        break;
+		case '2':
+	        $("input:radio[name=searchType][value=2]").attr("checked",true);  
+	        break;
+		case '3':
+	        $("input:radio[name=searchType][value=3]").attr("checked",true);  
+			break;
+		case '4':
+	        $("input:radio[name=searchType][value=4]").attr("checked",true);  
+			break;
+		case '5':
+	        $("input:radio[name=searchType][value=5]").attr("checked",true);  
+			break;
+		case '6':
+	        $("input:radio[name=searchType][value=6]").attr("checked",true);  
+			break;
+		default:
+			$("input:radio[name=searchType][value=0]").attr("checked",true); 
+			break;
+		}
+});  
+</script>
+
+<body>
+	<div class="the-search-container">
+		<header role="banner" class="probootstrap-header">
+			<div class="container">
+				<a href="/index/toIndex" class="probootstrap-logo">QAQ
+					CrowdFunding<span></span>
+				</a> <a href="#" class="probootstrap-burger-menu visible-xs"><i>Menu</i></a>
+				<div class="mobile-menu-overlay"></div>
+
+				<nav role="navigation" class="probootstrap-nav hidden-xs">
+					<div class="button_su">
+						<span class="su_button_circle"> </span> <a href="/launch/toLaunch"
+							class="button_su_inner"> <span class="button_text_container">
+								发起众筹 </span>
+						</a>
+					</div>
+				</nav>
+				<nav role="navigation" class="probootstrap-nav_login hidden-xs">
+					<div class="button_su_login" id="div_button">
+						<span class="su_button_circle"> </span> <a href="#"
+							class="button_su_inner_login"> <span
+							class="button_text_container"
+							onclick="window.location.href='/login/toLogin';"> 登录 </span>
+						</a>
+					</div>
+				</nav>
+				<div class="head-image" id="div_head_image"
+					onclick="window.location.href='/fore/home'">
+					<img th:src="@{/img/head.png}" class="round_icon" alt=""
+						style="cursor: pointer">
+					<div class="news-alert-head" id="head_message_num"
+						th:text="${messageNum}"></div>
+					<div class="head-image-table">
+						<div class="head-image-nickname" th:text="${flag}"
+							style="cursor: pointer"></div>
+						<div class="head-image-button" style="cursor: pointer">个人信息</div>
+						<div class="head-image-button" style="cursor: pointer">账户详情</div>
+						<div class="head-image-button" style="cursor: pointer">我的订单</div>
+						<div class="head-image-button" style="cursor: pointer">我的发起</div>
+						<div class="head-image-button" style="cursor: pointer">设置</div>
+						<div class="head-image-button" style="cursor: pointer">
+							消息
+							<div class="news-alert-news" id="message_num"
+								th:text="${messageNum}"></div>
+						</div>
+						<div class="head-image-button" style="cursor: pointer"
+							onclick="exit()">退出</div>
+
+					</div>
+				</div>
+				<div class="search d7">
+					<form action="/search/searchKeyword" method="get">
+						<input type="text" name="keyword" placeholder="搜索从这里开始..." />
+						<button type="submit"></button>
+					</form>
+				</div>
+
+
+			</div>
+		</header>
+
+		<form action="/search/searchResult" method="get">
+			<div class="search-box">
+				<input type="text" name="keyWord" placeholder="请输入关键字"
+					class="search-input" th:value="${init.keyWord}" /> <input
+					class="search-button" type="submit"></input>
+			</div>
+			<div class="select-box">
+				<div class="select-list">
+					<label class="radio-label">类型筛选：</label> <input
+						class="radio-select" type="radio" name="searchType" value="0">
+					全部&nbsp;</input> <input class="radio-select" type="radio" name="searchType"
+						value="1"> 公益&nbsp;</input> <input class="radio-select"
+						type="radio" name="searchType" value="2"> 艺术&nbsp;</input> <input
+						class="radio-select" type="radio" name="searchType" value="3">
+					农业&nbsp;</input> <input class="radio-select" type="radio" name="searchType"
+						value="4"> 出版&nbsp;</input> <input class="radio-select"
+						type="radio" name="searchType" value="5"> 娱乐&nbsp;</input> <input
+						class="radio-select" type="radio" name="searchType" value="6">
+					其它</input>
+				</div>
+				<div class="select-list">
+					<label class="radio-label">状态筛选：</label> <input
+						class="radio-select" type="radio" name="searchState" value="0"
+						checked="checked">全部&nbsp;&nbsp; </input> <input
+						class="radio-select" type="radio" name="searchState" value="21">筹资中&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</input>
+					<input class="radio-select" type="radio" name="searchState"
+						value="31">成功结束</input>
+				</div>
+				<div class="select-list">
+					<label class="radio-label">排序筛选：</label> <input
+						class="radio-select" type="radio" name="searchOrder" value="0"
+						checked="checked">默认&nbsp;&nbsp; </input> <input
+						class="radio-select" type="radio" name="searchOrder" value="1">最新上线↓&nbsp;</input>
+					<input class="radio-select" type="radio" name="searchOrder"
+						value="2">目标金额↓&nbsp;</input> <input class="radio-select"
+						type="radio" name="searchOrder" value="3">筹款额↓</input>
+				</div>
+			</div>
+		</form>
+		<div class="project-box">
+			<div class="project" th:each="pro,iterStat:${projects}">
+
+				<div class="project-image">
+					<a th:href="@{'/detail/showDetail?projID='+${pro.id}}"> <img
+						class="cover-image" th:src="${pro.cover}" style="cursor: pointer" />
+					</a>
+				</div>
+				<div class="title" th:text="${pro.name}"></div>
+
+				
+				<!-- 限制长度 -->
+					<div class="General-information"
+						th:text="${#strings.substring(pro.purpose,0,95)+'......'}"
+						th:if="${#strings.length(pro.purpose)>100}"></div>
+					<div class="General-information" th:text="${pro.purpose}"
+						th:if="${#strings.length(pro.purpose)<100}"></div>
+				<div class="labels">
+					<span class="project-label" th:text="''"></span>
+				</div>
+				<div class="main-information">
+					<div class="oneofthree-info">
+						<div style="color: #000;">已筹款</div>
+						<div style="color: rgb(255, 0, 0);"
+							th:text="￥+${pro.currentMoney}"></div>
+					</div>
+					<div class="oneofthree-info">
+						<div style="color: #000;">截止日期</div>
+						<div style="color: rgb(255, 0, 0);" th:text="${pro.endTime}"></div>
+					</div>
+					<div class="oneofthree-info">
+						<div style="color: #000;">筹款目标</div>
+						<div style="color: rgb(255, 0, 0);" th:text="￥+${pro.targetMoney}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+            $( ".button_su_inner" ).mouseenter(function(e) {
+               var parentOffset = $(this).offset(); 
+              
+               var relX = e.pageX - parentOffset.left;
+               var relY = e.pageY - parentOffset.top;
+               $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+               $(this).prev(".su_button_circle").removeClass("desplode-circle");
+               $(this).prev(".su_button_circle").addClass("explode-circle");
+            
+            });
+            
+            $( ".button_su_inner" ).mouseleave(function(e) {
+            
+                 var parentOffset = $(this).offset(); 
+            
+                 var relX = e.pageX - parentOffset.left;
+                 var relY = e.pageY - parentOffset.top;
+                 $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+                 $(this).prev(".su_button_circle").removeClass("explode-circle");
+                 $(this).prev(".su_button_circle").addClass("desplode-circle");
+            
+            });
+    
+    
+            $( ".button_su_inner_login" ).mouseenter(function(e) {
+               var parentOffset = $(this).offset(); 
+              
+               var relX = e.pageX - parentOffset.left;
+               var relY = e.pageY - parentOffset.top;
+               $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+               $(this).prev(".su_button_circle").removeClass("desplode-circle");
+               $(this).prev(".su_button_circle").addClass("explode-circle");
+            
+            });
+    
+    
+            $( ".button_su_inner_login" ).mouseleave(function(e) {
+            
+            var parentOffset = $(this).offset(); 
+       
+            var relX = e.pageX - parentOffset.left;
+            var relY = e.pageY - parentOffset.top;
+            $(this).prev(".su_button_circle").css({"left": relX, "top": relY });
+            $(this).prev(".su_button_circle").removeClass("explode-circle");
+            $(this).prev(".su_button_circle").addClass("desplode-circle");
+       
+    });</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>hello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<script type="text/javascript"
+	th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery-validator -->
+<script type="text/javascript"
+	th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+</head>
+<body>
+
+
+	<div th:replace="/fore/home::header"></div>
+
+	<div class = "text-center">
+	<p th:text="个人信息如下"></p>
+	<p th:text="' user id:'+${user.id}"></p>
+	<p th:text="' user name:'+${user.username}"></p>
+	<p th:text="' user money:'+${user.money}"></p>
+	</div>
+
+	
+
+
+
+
+</body>
+</html>

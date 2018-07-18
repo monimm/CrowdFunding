@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="multipart/form-data;charset=utf-8" />
+    <title>琦琦众筹</title>
+    <!-- jquery -->
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.ui.widget.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.iframe-transport.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.fileupload.js}"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript"
+    th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript"
+    th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+    <!-- -->
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <!-- city.js -->
+    <script type="text/javascript" th:src="@{/js/city.js}"></script>
+
+
+    <link rel="shortcut icon" href="" />
+    <link rel="bookmark" href="" />
+
+    <script src="js/jquery.min.js" ></script>
+    <script type="text/javascript" src="/js/modernizr.min.js"></script>
+    <link rel="stylesheet"   href="/css/lp_main.css" />
+    <link rel="stylesheet"   href="/css/lp_spe.css" />
+</head>
+<body>
+<div class="container" >
+    <div id="splitlayout" class="splitlayout" >
+        <!-- 主界面选项 -->
+        <div class="intro" >
+            <div class="side side-left" >
+                <div class="intro-content" >        
+                    <h1><span>公开型众筹</span></h1>
+                </div>
+                <div class="overlay" ></div>
+            </div>
+            <div class="side side-right" >
+                <div class="intro-content" >
+                    <h1><span>非公开型众筹</span></h1>
+                </div>
+                <div class="overlay" ></div>
+                <div class="back-homepage" >
+                    <a class="" href="/fore/index" ><img src="/img/Q.png" style="margin-top:20%;" /></a>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧 -->
+        <div class="page page-right">
+            <div class="page-inner">
+                <section>
+                    <!-- 非公开-简介 -->
+                    <div class="box-intro" >
+                        <div class="box-header" >
+                            非公开型众筹
+                        </div>
+                        <div class="box-content" >
+                            <div class="box-content-item" >
+                                <span class="left-item" >无截止日期</span>
+                                <span class="right-item" >无回报设置</span>
+                            </div>
+                            <div class="box-content-item" >
+                                <span class="left-item" >平台不会为其宣传推广</span>
+                                <span class="right-item" >随时提款，无需审核</span>
+                            </div>
+                            <div class="box-content-item" >
+                                <span class="left-item" >无任何手续费</span>
+                                <span class="right-item" >可由他人帮助认证</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 非公开-Tab Before -->
+                    <div id="close-tab-before" class="box-tab" >
+                        <div class="tab-content" >
+                            <ul>
+                                <li id="close-tab-close" onclick="closeTabSwitch()"><a href="#close-tab-after" >发起非公开型众筹</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 非公开-Tab After -->
+                    <div id="close-tab-after" class="box-tab" >
+                        <div class="tab-content" >
+                            <ul>
+                                <li id="close-tab-user" ><a href="#close-tab-after" >个人信息</a></li>
+                                <li id="close-tab-pjt" ><a href="#close-tab-after" >项目信息</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form action = "/launch/launchClose" name="uploadCloseForm" method="post" enctype="multipart/form-data">
+                        <!-- 非公开-个人信息 -->
+                        <div id="close-detail-user" class="box-detail" >
+                            <div class="detail-content" >
+                                <div class="detail-content-item" >
+                                    <h3>请填写您的个人信息</h3>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >姓名：</div>
+                                    <div class="detail-content-item-content" ><input id="closeName" class="input" name="closeName" type="text" placeholder="请输入您的真实姓名（必填）" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >身份证号：</div>
+                                    <div class="detail-content-item-content" ><input id="closeIdNumber" class="input" name="closeIdNumber" type="text" placeholder="请输入您的身份证号（必填）" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >手机号：</div>
+                                    <div class="detail-content-item-content" ><input id="closePhoneNumber" class="input" name="closePhoneNumber" type="text" placeholder="请输入您的手机号（必填）" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <h3>请上传相关材料</h3>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >身份证正面照：</div>
+                                    <div class="detail-content-item-content" ><a class="file">选择图片<input id="coloseIdPhotoFront" name="closeIdPhoto" accept="image/*" type="file" /></a></div>
+                                    <div class="detail-content-item-content" ><img src="" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >身份证反面照：</div>
+                                    <div class="detail-content-item-content" ><a class="file">选择图片<input id="closeIdPhotoBack" name="closeIdBack" accept="image/*" type="file" /></a></div>
+                                    <div class="detail-content-item-content" ><img src="" /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 非公开-项目信息 -->
+                        <div id="close-detail-pjt" class="box-detail" >
+                            <div class="detail-content" >
+                                <div class="detail-content-item" >
+                                    <h3>请填写您的项目信息</h3>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >设置封面：</div>
+                                    <div class="detail-content-item-content" ><a class="file">选择图片<input id="closeCoverPhoto" name="closeCoverPhoto" accept="image/*" type="file" /></a></div>
+                                    <div class="detail-content-item-content" ><img src="" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >描述图片：</div>
+                                    <div class="detail-content-item-content" ><a class="file">选择图片<input id="closeDecImage" name="closeDecImage" accept="image/*" type="file" multiple="multiple" /></a></div>
+                                    <div class="detail-content-item-content" ><img src="" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >设置标题：</div>
+                                    <div class="detail-content-item-content" ><input id="closeTitle" class="input" name="closeTitle" type="text" placeholder="请输入您的项目标题（必填）" onKeyUp="javascript:checkWordOne(this);" onMouseDown="javascript:checkWordOne(this);" /></div>
+                                    <div class="word-check" >
+                                        还可以输入<span id="wordCheckOne">20</span>个字符 
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >项目目的：</div>
+                                    <div class="detail-content-item-content" ><textarea id="closePurpose" name="closePurpose" placeholder="请输入您的项目目的（必填）" onKeyUp="javascript:checkWordTwo(this);" onMouseDown="javascript:checkWordTwo(this);"  style="resize:none;" ></textarea></div>
+                                    <div class="word-check" >
+                                        还可以输入<span id="wordCheckTwo">200</span>个字符 
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >项目故事：</div>
+                                    <div class="detail-content-item-content" ><textarea id="closeCoverStory" name="closeCoverStory" placeholder="请输入您的项目故事（非必填）" onKeyUp="javascript:checkWordThree(this);" onMouseDown="javascript:checkWordThree(this);"  style="resize:none;" ></textarea></div>
+                                    <div class="word-check" >
+                                        还可以输入<span id="wordCheckThree">500</span>个字符 
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >宣传视频：</div>
+                                    <div class="detail-content-item-content" ><input type="text" class="input" placeholder="例如：https://v.qq.com/..（非必填）" ></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >筹款金额：</div>
+                                    <div class="detail-content-item-content" ><input id="closeTargetMoney" class="input" name="closeTargetMoney" type="number" value="500" step="100" /></div>
+                                    <div class="prompt-msg" >
+                                        筹款金额/元，最低500
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >筹款周期：</div>
+                                    <div class="detail-content-item-content" ><input id="closeLastTime" class="input" name="closeLastTime" type="number" value="10" step="1"  /></div>
+                                    <div class="prompt-msg" >
+                                        筹资周期/天，10-59天
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >项目地点：</div>
+                                    <select name="closeProvince" onchange="chinaChange(this,document.getElementById('city'));" >
+                                        <option value ="provinceSelect">请选择省份</option>
+                                        <option value ="北京">北京市 </option>
+                                        <option value ="天津">天津市 </option>
+                                        <option value ="上海">上海市 </option>
+                                        <option value ="重庆">重庆市 </option>
+                                        <option value ="河北省">河北省 </option>
+                                        <option value ="山西省">山西省 </option>
+                                        <option value ="辽宁省">辽宁省 </option>
+                                        <option value ="吉林省">吉林省 </option>
+                                        <option value ="黑龙江省">黑龙江省</option>
+                                        <option value ="江苏省">江苏省 </option>
+                                        <option value ="浙江省">浙江省 </option>
+                                        <option value ="安徽省">安徽省 </option>
+                                        <option value ="福建省">福建省 </option>
+                                        <option value ="江西省">江西省 </option>
+                                        <option value ="山东省">山东省 </option>
+                                        <option value ="河南省">河南省 </option>
+                                        <option value ="湖北省">湖北省 </option>
+                                        <option value ="湖南省">湖南省 </option>
+                                        <option value ="广东省">广东省 </option>
+                                        <option value ="海南省">海南省 </option>
+                                        <option value ="四川省">四川省 </option>
+                                        <option value ="贵州省">贵州省 </option>
+                                        <option value ="云南省">云南省 </option>
+                                        <option value ="陕西省">陕西省 </option>
+                                        <option value ="甘肃省">甘肃省 </option>
+                                        <option value ="青海省">青海省 </option>
+                                        <option value ="台湾省">台湾省 </option>
+                                        <option value ="广西壮族自治区">广西壮族自治区</option>
+                                        <option value ="内蒙古自治区"> 内蒙古自治区</option>
+                                        <option value ="西藏自治区"> 西藏自治区</option>
+                                        <option value ="宁夏回族自治区"> 宁夏回族自治区 </option>
+                                        <option value ="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                        <option value ="香港特别行政区">香港特别行政区</option>
+                                        <option value ="澳门特别行政区">澳门特别行政区</option>
+                                    </select>
+                                    <select name="closeCity" id="city" >
+                                        <option value ="citySelect">请选择市区</option>
+                                    </select>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <button onclick="submitCloseProject()">提交</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+        <!-- 左侧 -->
+        <div class="page page-left">
+            <div class="page-inner">
+                <section>
+                    <!-- 公开-简介 -->
+                    <div class="box-intro" >
+                        <div class="box-header" >
+                            公开型众筹
+                        </div>
+                        <div class="box-content" >
+                            <div class="box-content-item" >
+                                <span class="left-item" >需设置截止日期</span>
+                                <span class="right-item" >需设置回报</span>
+                            </div>
+                            <div class="box-content-item" >
+                                <span class="left-item" >通过审核后在平台展示</span>
+                                <span class="right-item" >筹资周期内达到目标才算完成</span>
+                            </div>
+                            <div class="box-content-item" >
+                                <span class="left-item" >收取部分手续费</span>
+                                <span class="right-item" >项目成功后按承诺回报</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 公开-Tab Before -->
+                    <div id="open-tab-before" class="box-tab" >
+                        <div class="tab-content" >
+                            <ul>
+                                <li id="open-tab-open" onclick="openTabSwitch()"><a href="#open-tab-after" >发起公开型众筹</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 公开-Tab After -->
+                    <div id="open-tab-after" class="box-tab" >
+                        <div class="tab-content" >
+                            <ul>
+                                <li id="open-tab-user" ><a href="#open-tab-after" >个人信息</a></li>
+                                <li id="open-tab-pjt" ><a href="#open-tab-after" >项目信息</a></li>
+                                <li id="open-tab-reward" ><a href="#open-tab-after" >回报信息</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <form action = "/launch/launchOpen" name="uploadOpenForm" method="post" enctype="multipart/form-data">
+                        <!-- 公开-个人信息 -->
+                        <div id="open-detail-user" class="box-detail" >
+                            <div class="detail-content" >
+                                <div class="detail-content-item" >
+                                    <h3>请填写您的个人信息</h3>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >姓名：</div>
+                                    <div class="detail-content-item-content" ><input id="name" class="input" name="name" type="text" placeholder="请输入您的真实姓名（必填）" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >身份证号：</div>
+                                    <div class="detail-content-item-content" ><input id="idNumber" class="input" name="idNumber" type="text" placeholder="请输入您的身份证号（必填）" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >手机号：</div>
+                                    <div class="detail-content-item-content" ><input id="phoneNumber" class="input" name="phoneNumber" type="text" placeholder="请输入您的手机号（必填）" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <h3>请上传相关材料</h3>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >身份证正面照：</div>
+                                    <div class="detail-content-item-content" ><a class="file">选择图片 <input id="idPhotoFront" name="idPhoto" accept="image/*" type="file" /></a></div>
+                                    <div class="detail-content-item-content" ><img src="" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >身份证反面照：</div>
+                                    <div class="detail-content-item-content" ><a class="file">选择图片<input id="idPhotoBack" name="idPhoto" type="file" accept="image/*"/></a></div>
+                                    <div class="detail-content-item-content" ><img src="" /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 公开-项目信息 -->
+                        <div id="open-detail-pjt" class="box-detail" >
+                            <div class="detail-content" >
+                                <div class="detail-content-item" >
+                                    <h3>请填写您的项目信息</h3>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >设置封面：</div>
+                                    <div class="detail-content-item-content" ><a class="file">选择图片<input id="coverPhoto" name="coverPhoto" type="file" accept="image/*"/></a></div>
+                                    <div class="detail-content-item-content" ><img src="" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >描述图片：</div>
+                                    <div class="detail-content-item-content" ><a class="file">选择图片<input id="dec_imgs" name="file" type="file" multiple="multiple" accept="image/*" /></a></div>
+                                    <div class="detail-content-item-content" ><img src="" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >设置标题：</div>
+                                    <div class="detail-content-item-content" ><input id="title" class="input" name="title" type="text" placeholder="请输入您的项目标题（必填）" onKeyUp="javascript:checkWordFour(this);" onMouseDown="javascript:checkWordOne(this);" /></div>
+                                    <div class="word-check" >
+                                        还可以输入<span id="wordCheckFour">20</span>个字符 
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >项目目的：</div>
+                                    <div class="detail-content-item-content" ><textarea id="purpose" name="purpose" placeholder="请输入您的项目目的（必填）" onKeyUp="javascript:checkWordFive(this);" onMouseDown="javascript:checkWordTwo(this);"  style="resize:none;" ></textarea></div>
+                                    <div class="word-check" >
+                                        还可以输入<span id="wordCheckFive">200</span>个字符 
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >项目故事：</div>
+                                    <div class="detail-content-item-content" ><textarea id="coverStory" name="coverStory" placeholder="请输入您的项目故事（非必填）" onKeyUp="javascript:checkWordSix(this);" onMouseDown="javascript:checkWordThree(this);"  style="resize:none;" ></textarea></div>
+                                    <div class="word-check" >
+                                        还可以输入<span id="wordCheckSix">500</span>个字符 
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >宣传视频：</div>
+                                    <div class="detail-content-item-content" ><input type="text" class="input" placeholder="例如：https://v.qq.com/..（非必填）" ></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >筹款金额：</div>
+                                    <div class="detail-content-item-content" ><input id="targetMoney" class="input" name="targetMoney" type="number" value="500" step="100" /></div>
+                                    <div class="prompt-msg" >
+                                        筹款金额/元，最低500元
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >筹款周期：</div>
+                                    <div class="detail-content-item-content" ><input id="lastTime" class="input" name="lastTime" type="number" value="10" step="1"  /></div>
+                                    <div class="prompt-msg" >
+                                        筹资周期/天，10-59天
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >项目地点：</div>
+                                    <select id="province" name="province" onchange="chinaChange0(this,document.getElementById('city0'));" >
+                                        <option value ="provinceSelect">请选择省份</option>
+                                        <option value ="北京">北京市 </option>
+                                        <option value ="天津">天津市 </option>
+                                        <option value ="上海">上海市 </option>
+                                        <option value ="重庆">重庆市 </option>
+                                        <option value ="河北省">河北省 </option>
+                                        <option value ="山西省">山西省 </option>
+                                        <option value ="辽宁省">辽宁省 </option>
+                                        <option value ="吉林省">吉林省 </option>
+                                        <option value ="黑龙江省">黑龙江省</option>
+                                        <option value ="江苏省">江苏省 </option>
+                                        <option value ="浙江省">浙江省 </option>
+                                        <option value ="安徽省">安徽省 </option>
+                                        <option value ="福建省">福建省 </option>
+                                        <option value ="江西省">江西省 </option>
+                                        <option value ="山东省">山东省 </option>
+                                        <option value ="河南省">河南省 </option>
+                                        <option value ="湖北省">湖北省 </option>
+                                        <option value ="湖南省">湖南省 </option>
+                                        <option value ="广东省">广东省 </option>
+                                        <option value ="海南省">海南省 </option>
+                                        <option value ="四川省">四川省 </option>
+                                        <option value ="贵州省">贵州省 </option>
+                                        <option value ="云南省">云南省 </option>
+                                        <option value ="陕西省">陕西省 </option>
+                                        <option value ="甘肃省">甘肃省 </option>
+                                        <option value ="青海省">青海省 </option>
+                                        <option value ="台湾省">台湾省 </option>
+                                        <option value ="广西壮族自治区">广西壮族自治区</option>
+                                        <option value ="内蒙古自治区"> 内蒙古自治区</option>
+                                        <option value ="西藏自治区"> 西藏自治区</option>
+                                        <option value ="宁夏回族自治区"> 宁夏回族自治区 </option>
+                                        <option value ="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                        <option value ="香港特别行政区">香港特别行政区</option>
+                                        <option value ="澳门特别行政区">澳门特别行政区</option>
+                                    </select>
+                                    <select name="city" id="city0" >
+                                        <option value ="citySelect">请选择市区</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 公开-回报信息 -->
+                        <div id="open-detail-reward" class="box-detail" >
+                            <div class="detail-content" >
+                                <div class="detail-content-item" >
+                                    <h3>请填写您的回报信息</h3>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >回报类型：</div>
+                                    <div class="detail-content-item-content" >
+                                        <label><input id="type1" type="radio" value="1" name="rewardType" checked="checked" />实物回报（回报需邮寄）</label>
+                                        <label><input id="type2" type="radio" value="2" name="rewardType" />虚拟回报（回报无需邮寄）</label>
+                                    </div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >支持金额：</div>
+                                    <div class="detail-content-item-content" ><input id="amount4Reward" class="input" name="amount4Reward" type="number" class="input" placeholder="请输入得到回报的用户需支持的最低金额/元" /></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <div class="detail-content-item-header" >回报内容：</div>
+                                    <div class="detail-content-item-content" ><textarea id="reward" name="reward" style="resize:none;" placeholder="请输入回报内容" ></textarea></div>
+                                </div>
+                                <div class="detail-content-item" >
+                                    <button onclick="submitOpenProject()">提交</button>
+                                </div>
+                            </div>  
+                        </div> 
+                    </form>
+                </section>
+            </div>
+        </div>
+        <a href="#" class="back back-right" title="返回选择" >返回</a>
+        <a href="#" class="back back-left" title="返回选择" >返回</a>
+    </div>
+</div>
+<script th:src="@{/js/lp_main.js}" ></script>
+<script th:src="@{/js/lp_spe.js}" ></script>
+<script th:src="@{/js/city.js}" ></script>
+</body>
+
+<script>
+    function submitCloseProject(){
+        alert("222");
+        $("#uploadCloseForm").validate({
+                submitHandler : function(form) {
+                    alert("来看看Close！");
+                    doCloseSubmit();
+                }
+            });
+    }
+    function doCloseSubmit(){
+        g_showLoading();
+        alert("嘿！Close！");
+        $.ajax({
+            url : "/launch/launchClose",
+            type : "POST",
+            cache : false,
+            //async: false,
+            processData : false,
+            contentType : false,
+            data : uploadCloseForm,
+            success : function(data) {
+                alert("成功返回！");
+                layer.closeAll();
+                if (data.code == 0) {
+                    layer.msg("保存项目信息成功！");
+                    //window.location.href = "/fore/home";
+                } else {
+                    layer.msg("返回码不为0");
+                    layer.msg(data.msg);
+                }
+            },
+            error : function() {
+                layer.closeAll();
+            }
+        });
+    }
+
+
+    function submitOpenProject() {
+    
+            $("#uploadOpenForm").validate({
+                submitHandler : function(form) {
+                    alert("来看看Open！");
+                    doOpenSubmit();
+                }
+            });
+    }
+    function doOpenSubmit() {
+        g_showLoading();
+        alert("嘿！Open！");
+        $.ajax({
+            url : "/launch/launchOpen",
+            type : "POST",
+            cache : false,
+            //async: false,
+            processData : false,
+            contentType : false,
+            data : uploadOpenForm,
+            success : function(data) {
+                alert("成功返回！");
+                layer.closeAll();
+                if (data.code == 0) {
+                    layer.msg("保存项目信息成功！");
+                    //window.location.href = "/fore/home";
+                } else {
+                    layer.msg("返回码不为0");
+                    layer.msg(data.msg);
+                }
+            },
+            error : function() {
+                layer.closeAll();
+            }
+        });
+    }
+
+</script>
+
+</html>

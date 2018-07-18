@@ -1,0 +1,102 @@
+/*************** Tab ***************/
+#uc_tabCon_0{
+    display:block;
+}
+#uc_tabCon_1{
+    display:none;
+}
+#uc_tabCon_2{
+    display:none;
+}
+#uc_tabCon_3{
+    display:none;
+}
+#uc_tabCon_4{
+    display:none;
+}
+#uc_tabCon_5{
+    display:none;
+}
+
+/*************** Child Tab ***************/
+.uc_tabConItem menu li{
+    display:inline-block;
+    list-style: none;
+    padding:5px;
+}
+/* 账户详情 */
+#uc_acntTabCon_0{
+    display:block;
+}
+#uc_acntTabCon_1{
+    display:none;
+}
+/* 个人消息 */
+#uc_msgTabCon_0{
+    display:block;
+}
+#uc_msgTabCon_1{
+    display:none;
+}
+#uc_msgTabCon_2{
+    display:none;
+}
+/* 我的订单 */
+#uc_odrTabCon_0{
+    display:block;
+}
+#uc_odrTabCon_1{
+    display:none;
+}
+#uc_odrTabCon_2{
+    display:none;
+}
+/* 我的发起 */
+#uc_pjtTabCon_0{
+    display:block;
+}
+#uc_pjtTabCon_1{
+    display:none;
+}
+#uc_pjtTabCon_2{
+    display:none;
+}
+/************** Dialog **************/
+.uc_dialogSur{ 
+    display: none; 
+    position: absolute; 
+    top: 0%; 
+    left: 0%; 
+    width: 100%; 
+    height: 100%; 
+    background-color: black; 
+    z-index:1001; 
+    -moz-opacity: 0.8; 
+    opacity:.80; 
+    filter: alpha(opacity=88); 
+} 
+.uc_dialogCon { 
+    display: none; 
+    position: absolute; 
+    top: 25%; 
+    left: 25%; 
+    width: 55%; 
+    height: 500px; 
+    padding: 20px; 
+    border: 3px solid rgb(88, 81, 66); 
+    background-color: white; 
+    z-index:1002; 
+    overflow: auto; 
+}
+
+/**************** 特殊的 ****************/
+.uc_dialogCon span{
+    display: inline-block;
+}
+
+.uc_odrInfoTr{
+    float:left;
+}
+.uc_pjtInfoTr{
+    float:left;
+}

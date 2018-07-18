@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>hello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<script type="text/javascript"
+	th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery-validator -->
+<script type="text/javascript"
+	th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+
+<style>
+.table th, .table td { 
+text-align: center;
+vertical-align: middle!important;
+}
+</style>
+</head>
+ 
+<body>
+	<div class="panel panel-default  text-center ">
+		<div class="panel-heading">编辑用户</div>
+		<div class="panel-body  text-center">
+			<form method="post" th:action="@{/user/back/updateUser}"
+				th:object="${fuckuser}">
+				<div class="container ">
+					<table class="table table-bordered table-hover col-md-10">
+						<thead>
+							<tr>
+								<th class="col-md-5"> 属性</th>
+								<th class="col-md-5">值</th>
+							</tr>
+
+						</thead>
+						<tbody  >
+							<tr>
+								<th >ID</th>
+								<th ><input th:field="*{id}" type="text" readonly="readonly" /></th>
+							</tr>
+							<tr>
+								<th>用户名</th>
+								<th><input th:field="*{username}" type="text"
+									readonly="readonly" /></th>
+							</tr>
+							<tr>
+								<th>密码</th>
+								<th><input th:field="*{password}" type="text" /></th>
+							</tr>
+							<tr>
+								<th>余额</th>
+								<th><input th:field="*{money}" type="text"
+									readonly="readonly" /></th>
+							</tr>
+							<tr>
+								<th>手机</th>
+								<th><input th:field="*{phone}" type="text" /></th>
+							</tr>
+							<tr>
+								<th>邮箱</th>
+								<th><input th:field="*{mail}" type="text" /></th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<button type="submit" class="btn btn-success ">保存</button>
+			</form>
+		</div>
+ 
+	</div>
+
+</body>
+</html>

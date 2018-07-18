@@ -1,0 +1,93 @@
+.type-container{
+    background-color:rgb(255, 154, 154);
+    width: 1600px;
+    height: 800px;
+    margin: 50px 8% 0 8%;
+    min-width: 70%;
+    position: absolute;
+    top: 20px;
+}
+
+.type-title{
+    background-color: cornflowerblue;
+    text-align: center;
+    font-size: 30px;
+    width: 90%;
+    height: 40px;
+    margin: 20px 5% 20px 5%;
+}
+
+.two-type-content{
+    width: 90%;
+    height: 86%;
+    margin: 16px 5% 16px 5%;
+    position: absolute;
+    top: 80px;
+}
+
+.type-one{
+    background-color: red;
+    width: 40%;
+    height: 80%;
+    position: absolute;
+    top: 69px;
+    left: 144px;
+    opacity: 0.5;
+}
+.type-one:hover{
+    opacity: 1;
+}
+
+.type-two{
+    background-color: greenyellow;
+    width: 40%;
+    height: 80%;
+    position: absolute;
+    top: 69px;
+    left: 720px;
+    opacity: 0.5;
+}
+.type-two:hover{
+    opacity: 1;
+}
+
+
+.two-type-content-image{
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 100px;
+    left: 238px;
+}
+
+.two-type-content-title{
+    background-color:white;
+    width: 80%;
+    height: 50px;
+    position: absolute;
+    top: 225px;
+    left: 57.6px;
+    text-align: center;
+    font-size: 40px;
+}
+.two-type-content-content{
+    background-color: rgb(196, 47, 255);
+    width: 80%;
+    height: 210px;
+    position: absolute;
+    top: 300px;
+    left: 57.6px;
+}
+
+.two-type-content-content-oneofsix{
+    background-color: darkorange;
+    width: 200px;
+    height:60px;
+    margin: 5px 15px 5px 15px;
+    float: left;
+    text-align: left;
+    word-break: break-all; 
+    word-wrap:break-word;
+    font-size: 20px;
+}

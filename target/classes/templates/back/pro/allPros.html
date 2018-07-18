@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>hello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+ 
+</head>
+<style>
+.table th, .table td {
+	text-align: center;
+	vertical-align: middle !important;
+}
+</style>
+<body>
+ 	<div th:replace="/back/home::header"></div>
+	<div class="panel panel-default  text-center">
+		<!-- 向面板添加标题容器 -->
+		<div class="panel-heading">所有项目总览</div>
+		<div class="panel-body">
+			<div class="container ">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="col-md-1">ID</th>
+							<th class="col-md-3">项目名</th>
+							<th class="col-md-1">用户</th>
+							<th class="col-md-2">目标额度</th>
+							<th class="col-md-2">当前筹款</th>
+							<th class="col-md-1">状态</th>
+							<th class="col-md-3">操作</th>
+						</tr>
+					</thead>
+					<!-- th:remove被处理时会被删除 -->
+					<tbody th:remove="all-but-first">
+						<tr th:each="pro : ${projects}">
+							<td  th:text="${pro.id}"> 
+							</td>
+							<td><a class="btn btn-link" th:text="${pro.name}"
+								th:href="'/detail/showDetail?projID='+${pro.id}"></a>
+							</td>
+							<td><a class="btn btn-link" th:text="${pro.userId}"
+								th:href="'/user/back/userDetails?id='+${pro.userId}"></a>
+							</td>
+							<td
+								th:text="${'￥' + #numbers.formatDecimal(pro.targetMoney, 1, 2)}">2</td>
+							<td
+								th:text="${'￥' + #numbers.formatDecimal(pro.currentMoney, 1, 2)}">3</td>
+							<td >
+							<p th:text="'待提交'" th:if="${pro.state} == 0"></p>
+											<p th:text="'审核中'" th:if="${pro.state} == 1"></p>
+											<p th:text="'筹款中'" th:if="${pro.state} == 21"></p>
+											<p th:text="'延期申请中'" th:if="${pro.state} == 22"></p>
+											<p th:text="'筹款成功'" th:if="${pro.state} == 31"></p>
+											<p th:text="'筹款失败'" th:if="${pro.state} == 30"></p>
+											<p th:text="'提款中'" th:if="${pro.state} == 41"></p>
+											<p th:text="'待回报'" th:if="${pro.state} == 5"></p>
+											<p th:text="'结束'" th:if="${pro.state} == 6"></p>
+											<p th:text="'撤销申请中'" th:if="${pro.state} == 88"></p>
+											<p th:text="'锁定中'" th:if="${pro.state} == 99 or ${pro.state} ==80"></p>
+							</td>
+							<td align="center"><a class="btn btn-success"
+								th:href="'/pro/back/updateState?id='+${pro.id}+'&amp;state=99'">锁定</a>
+								<a class="btn btn-danger"
+								th:href="'/pro/back/deletePro?id='+${pro.id}">撤销</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div th:replace="/page::page"></div>
+		</div>
+
+	</div>
+
+
+
+</body>
+</html>

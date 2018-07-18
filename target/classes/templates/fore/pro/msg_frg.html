@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<script type="text/javascript"
+	th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+
+</head>
+<style>
+</style>
+<body>
+
+
+	<!-- 全部消息 -->
+
+	<div id="uc-message-all-content" class="uc-content-account"
+		th:fragment="frg0" xmlns:th="http://www.w3.org/1999/xhtml">
+		<table class="table table-bordered table-hover">
+			<colgroup>
+				<col width="50px" />
+				<col width="150px" />
+				<col width="150px" />
+				<col width="100px" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>状态</th>
+					<th>消息标题</th>
+					<th>消息时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="msg : ${messages}">
+					<td>
+						<p th:if="${msg.state == 1}" th:text="'√'"></p>
+						<p th:if="${msg.state == 0}" th:text="'x'"></p>
+					</td>
+					<td>
+						<div>
+						<!-- 消息详情弹窗 --> <a href="JavaScript:void(0)"
+						th:text="${#strings.substring(msg.info,0,6)}"
+						onclick="uc_openDialogAllmsgdetail(this)"> </a>
+						<div id="uc-dialog-allmsgdetail" class="uc-dialog">
+							<div class="uc-dialog-header">
+								<h3>消息详情</h3>
+							</div>
+
+							<div class="uc-dialog-item">
+								<div class="uc-dialog-item-header"
+									th:text="${#strings.substring(msg.info,0,6)}"></div>
+								<div class="uc-dialog-item-content" th:text="${msg.info }">
+								</div>
+							</div>
+							<div class="uc-dialog-backicon">
+								<button onclick="uc_closeDialogAllmsgdetail(this)"
+									th:onclick="'updateMsg('+${msg.id}+')'"
+									th:if="${msg.state} == 0">关闭</button>
+								<button onclick="uc_closeDialogAllmsgdetail(this)"
+									th:if="${msg.state} == 1">关闭</button>
+							</div>
+						</div>
+						</div>
+					</td>
+					
+					<td>
+						<p th:text="${msg.time}"></p>
+					</td>
+					
+					<td><button class="btn btn-danger" th:onclick="'deleteMsg('+${msg.id}+')'">删除</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- 未读消息 -->
+
+	<div id="uc-message-unread-content" class="uc-content-account"
+		th:fragment="frg1" xmlns:th="http://www.w3.org/1999/xhtml">
+		<table class="table table-bordered table-hover">
+			<colgroup>
+				<col width="50px" />
+				<col width="150px" />
+				<col width="150px" />
+				<col width="100px" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>状态</th>
+					<th>消息标题</th>
+					<th>消息时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="msg : ${messages}" th:if="${msg.state == 0}">
+					<td>
+						<p th:text="'x'"></p>
+					</td>
+
+					<td>
+						<!-- 消息详情弹窗 --> <a href="JavaScript:void(0)"
+						th:text="${#strings.substring(msg.info,0,6)}"
+						onclick="uc_openDialogUnreadmsgdetail(this)"> </a>
+						<div id="uc-dialog-unreadmsgdetail" class="uc-dialog">
+							<div class="uc-dialog-header">
+								<h3>消息详情</h3>
+							</div>
+
+							<div class="uc-dialog-item">
+								<div class="uc-dialog-item-header"
+									th:text="${#strings.substring(msg.info,0,6)}">消息标题:</div>
+								<div class="uc-dialog-item-content" th:text="${msg.info }">
+								</div>
+							</div>
+							<div class="uc-dialog-backicon">
+								<button onclick="uc_closeDialogUnreadmsgdetail(this)"
+									th:onclick="'updateMsg('+${msg.id}+')'">关闭</button>
+							</div>
+						</div>
+					</td>
+					<td>
+						<p th:text="${msg.time}"></p>
+					</td>
+					<td><button class="btn btn-danger" th:onclick="'deleteMsg('+${msg.id}+')'">删除</button></td>
+
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<!-- 已读消息 -->
+
+	<div id="uc-message-read-content" class="uc-content-account"
+		th:fragment="frg2" xmlns:th="http://www.w3.org/1999/xhtml">
+		<table class="table table-bordered table-hover" id="uc_msgTabCon_2">
+			<colgroup>
+				<col width="50px" />
+				<col width="150px" />
+				<col width="150px" />
+				<col width="100px" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>状态</th>
+					<th>消息标题</th>
+					<th>消息时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="msg : ${messages}" th:if="${msg.state == 1}">
+					<td>
+						<p th:text="'√'"></p>
+
+					</td>
+					<td>
+						<!-- 消息详情弹窗 --> <a href="JavaScript:void(0)"
+						th:text="${#strings.substring(msg.info,0,6)}"
+						onclick="uc_openDialogReadmsgdetail(this)"> </a>
+						<div id="uc-dialog-readmsgdetail" class="uc-dialog">
+							<div class="uc-dialog-header">
+								<h3>消息详情</h3>
+							</div>
+
+							<div class="uc-dialog-item">
+								<div class="uc-dialog-item-header"
+									th:text="${#strings.substring(msg.info,0,6)}">消息标题:</div>
+								<div class="uc-dialog-item-content" th:text="${msg.info }">
+								</div>
+							</div>
+							<div class="uc-dialog-backicon">
+								<button onclick="uc_closeDialogReadmsgdetail(this)">关闭</button>
+							</div>
+						</div>
+					</td>
+					<td>
+						<p th:text="${msg.time}"></p>
+					</td>
+					<td><button class="btn btn-danger" th:onclick="'deleteMsg('+${msg.id}+')'">删除</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+
+</body>
+</html>

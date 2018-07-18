@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>支付页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/bootstrap/css/bootstrap.min.css}" />
+<script type="text/javascript"
+	th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<!-- jquery-validator -->
+<script type="text/javascript"
+	th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+
+<!-- layer -->
+<script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+<!-- md5.js -->
+<script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+<!-- common.js -->
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+<body>
+
+	<form action="#" th:action="@{/pay/alipay}" method="post">
+		<div class="row">
+			<label class="form-label col-md-1">项目ID</label> 
+			<input name="projectId"  type="text" th:required="true" />
+		</div>
+		<div class="row">
+			<label class="form-label col-md-1">用户ID</label> 
+			<input name="userId" type="text" th:required="true" /> 
+		</div>
+		<div class="row">
+			<label class="form-label col-md-1">手机号</label> 
+			<input name="phone" type="text" th:required="true" /> 
+		</div>
+		<div class="row">
+			<label class="form-label col-md-1">金额</label> 
+			<input name="money" type="text" th:required="true" /> 
+		</div>
+		<input type="submit" />
+	</form>
+
+
+	 
+ 
+
+</body>
+
+</html>

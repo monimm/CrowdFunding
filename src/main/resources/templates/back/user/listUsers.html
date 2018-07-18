@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>hello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+ 
+</head>
+<style>
+.table th, .table td {
+	text-align: center;
+	vertical-align: middle !important;
+}
+</style>
+<body>
+	<div th:replace="/back/home::header"></div>
+	<!-- 把表达式对应的值代替标签内的文本 -->
+	<div class="panel panel-default text-center ">
+		<!-- 向面板添加标题容器 -->
+		<div class="panel-heading">用户列表</div>
+		<div class="panel-body">
+
+			<div class="container " >
+				<table class="table table-bordered table-hover ">
+					<thead>
+						<tr class = "text-center">
+							<th class="col-md-2 ">用户名</th>
+							<th class="col-md-2">密码</th>
+							<th class="col-md-2">余额</th>
+							<th class="col-md-2">手机</th>
+							<th class="col-md-2">邮箱</th>
+							<th class="col-md-2">操作</th>
+						</tr>
+					</thead>
+					<!-- th:remove被处理时会被删除 -->
+					<tbody th:remove="all-but-first">
+						<tr th:each="user : ${users}">
+							<td ><a th:text="${user.username}" th:href="'/user/back/userDetails?id='+${user.id}"></a></td>
+							<td th:text="${user.password}">2</td>
+							<td th:text="${'￥' + #numbers.formatDecimal(user.money, 1, 2)}">3</td>
+							<td th:text="${user.phone}">4</td>
+							<td th:text="${user.mail}">5</td>
+							<td align="center"><a class="btn btn-success"
+								th:href="'/user/back/editUser?id='+${user.id}">编辑</a> <a
+								class="btn btn-danger"
+								th:href="'/user/back/deleteUser?id='+${user.id}">删除</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<script>
+				$(function() {
+					$("ul.pagination li.disabled a").click(function() {
+						return false;
+					});
+				});
+			</script>
+
+
+			<div th:replace="/page::page"></div>
+			<!-- 	<div>
+			<nav>
+				<ul class="pagination">
+					首页超链：
+					<li><th:if test="${!page.hasPreviouse}" class="disabled"></th:if>
+						aria-label属性用来给当前元素加上的标签描述，接受字符串作为参数。 <a
+						th:href="'?start=0'" aria-label="Previous"> <span
+							aria-hidden="true">«</span> 属性 aria-hidden="true" 用于保持模态窗口不可见，直到触发器被触发为止
+					</a></li>
+
+					上一页超链：
+					<li th:if ="${page.hasPreviouse}" >
+						<a th:href="'?start='+${page.start-page.count}"
+						aria-label="Previous"> <span aria-hidden="true">‹</span>
+					</a></li>
+							 
+					下一页超链：
+					<li th:if ="${page.hasNext}"> 
+					<a th:href="'?start='+${page.start+page.count}" aria-label="Next">
+							<span aria-hidden="true">›</span>
+					</a></li>
+
+					尾页超链：
+					<li><th:if test="${!page.hasNext()}" class="disabled"></th:if>
+						<a th:href="'?start='+${page.last}" aria-label="Next"> <span
+							aria-hidden="true">»</span>
+					</a></li>
+
+				</ul>
+			</nav>
+			
+			</div> -->
+		</div>
+
+	</div>
+
+
+
+</body>
+</html>

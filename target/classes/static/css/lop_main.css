@@ -1,0 +1,28 @@
+/* Tab内容块 */
+#lop_tabCon_0{
+    display:block;
+}
+#lop_tabCon_1{
+    display:none;
+}
+#lop_tabCon_2{
+    display:none;
+}
+#lop_tabCon_3{
+    display:none;
+}
+/* Tab */
+.lop_tab ul li{
+    display: inline-block;
+    list-style:none;
+}
+/* Tab切换的Button */
+#lop_lastStep{
+    display:none;
+}
+#lop_nextStep{
+    display:block;
+}
+#lop_submit{
+    display:none;
+}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>琦琦众筹</title>
+    <!-- jquery -->
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css"
+        th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <script type="text/javascript"
+        th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript"
+        th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript"
+        th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+
+
+    <link rel="shortcut icon" href="" />
+    <link rel="bookmark" href="" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />  
+</head>
+<body>
+    <div class="content" >
+        <div class="content-box clearfix" >
+            <div class="content-box-in" >
+                <div class="box-header" >
+                    <div class="header-item on" >手机重置密码</div>
+                    <div class="header-item" >邮箱重置密码</div>
+                    <span class="box-header-san" ></span>
+                </div>
+                <div class="box-form" >
+                    <div class="form-item">
+                        <form action="" id="form_phone" name="form_phone" method="post">
+                            <div class="form-item-list" >
+                                <input id="phone" name="phone" type="text" class="input" placeholder="请输入手机号" data-required="required" autocomplete="off" />
+                            </div>
+                            <div class="form-item-list" >
+                                <input id="IDcode_phone" name="IDcode_phone" type="text" class="input" placeholder="请输入手机验证码" data-required="required" autocomplete="off" />
+                                <input id="btn_getMessage" name = "btn_getMessage" type="button" class="child" value="获取验证码" onclick = "getMessage()" />
+                            </div>
+                            <div class="form-item-list" >
+                                <input id="newPWD_phone" name="newPWD_phone" type="password" class="input" placeholder="请设置新密码" data-required="required" autocomplete="off" />
+                            </div>
+                            <div class="form-item-list" >
+                                <input id="renewPWD_phone" name="renewPWD_phone" type="password" class="input" placeholder="请确认新密码" data-required="required" autocomplete="off" onkeyup="validatePWD_phone()" /><span id="tip_phone"></span>
+                            </div>
+                            <div class="form-item-btn" >
+                                <input id="submit_phone" name="submit_phone" type="submit" class="button" value="重置密码" onclick="changePWD_phone()" disabled="true" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-item" >
+                        <form action="" id="form_mail" name="form_mail" method="post">
+                            <div class="form-item-list" >
+                                <input id="mail" name="mail" type="text" class="input" placeholder="请输入邮箱" data-required="required" autocomplete="off" />
+                            </div>
+                            <div class="form-item-list" >
+                                <input id="IDcode_mail" name="IDcode_mail" type="text" class="input" placeholder="请输入邮箱验证码" data-required="required" autocomplete="off" />
+                                <input type="button" class="child" value="获取验证码" />
+                            </div>
+                            <div class="form-item-list" >
+                                <input id="newPWD_mail" name="newPWD_mail" type="password" class="input" placeholder="请设置新密码" data-required="required" autocomplete="off" />
+                            </div>
+                            <div class="form-item-list" >
+                                <input id="renewPWD_mail" name="renewPWD_mail" type="password" class="input" placeholder="请确认新密码" data-required="required" autocomplete="off" onkeyup="validatePWD_mail()" /><span id="tip_mail"></span>
+                            </div>
+                            <div class="form-item-btn" >
+                                <input id="submit_mail" name="submit_mail" type="submit" class="button" value="重置密码" onclick="changePWD_mail()" disabled="true" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+	
+	var sms = "";
+	
+    $(function() {
+
+        /*tab标签切换*/
+        function tabs(tabTit, on, tabCon) {
+            $(tabCon).each(function() {
+                $(this).children().eq(0).show();
+
+            });
+            $(tabTit).each(function() {
+                $(this).children().eq(0).addClass(on);
+            });
+            $(tabTit).children().click(function() {
+                $(this).addClass(on).siblings().removeClass(on);
+                var index = $(tabTit).children().index(this);
+                $(tabCon).children().eq(index).show().siblings().hide();
+            });
+        }
+        tabs(".box-header", "on", ".box-form");
+
+    })
+
+    function changePWD_phone() {
+        $("#form_phone").validate({
+            submitHandler : function(form) {
+                doChange_phone();
+            }
+        });
+    }
+
+    function changePWD_mail() {
+        $("#form_mail").validate({
+            submitHandler : function(form) {
+                doChange_mail();
+            }
+        });
+    }
+
+
+    function doChange_phone() {
+        g_showLoading();
+		var code = $("#IDcode_phone").val();
+		if(code == ""){
+			layer.msg("请输入验证码");
+		}
+		else{
+			if(sms == code){
+        		$.ajax({
+            		url : "/login/changePWD",
+            		type : "POST",
+            		data : {
+                		phoneOmail : $("#phone").val(),
+                		IDcode : $("#IDcode_phone").val(),
+                		newPWD : $("#newPWD_phone").val(),
+                		type : 1
+            		},
+            		success : function(data) {
+                		alert("phone submit success!");
+                		layer.closeAll();
+                		if (data.code == 0) {
+                    		layer.msg("修改成功");
+                    		window.location.href = "/login/toLogin";
+                		} else {
+                    		layer.msg(data.msg);
+                		}
+            		},
+            		error : function() {
+                		layer.closeAll();
+            		}
+        		});
+			}
+			else{
+				alert("验证码错误");
+				layer.closeAll();
+			}
+		}
+		
+    }
+    function doChange_mail() {
+        g_showLoading();
+
+        $.ajax({
+            url : "/login/changePWD",
+            type : "POST",
+            data : {
+                phoneOmail : $("#mail").val(),
+                IDcode : $("#IDcode_mail").val(),
+                newPWD : $("#newPWD_mail").val(),
+                type : 2
+            },
+            success : function(data) {
+                alert("phone submit success!");
+                layer.closeAll();
+                if (data.code == 0) {
+                    layer.msg("修改成功");
+                    window.location.href = "/login/toLogin";              
+                } else {
+                    layer.msg(data.msg);
+                }
+            },
+            error : function() {
+                layer.closeAll();
+            }
+        });
+    }
+    function validatePWD_phone(){
+        var pwd1 = document.getElementById("newPWD_phone").value;
+        var pwd2 = document.getElementById("renewPWD_phone").value;
+        if(pwd1 == pwd2) {
+            document.getElementById("tip_phone").innerHTML="✔两次密码相同";
+            document.getElementById("tip_phone").style.color="green";
+            document.getElementById("submit_phone").disabled = false;           
+        //document.getElementById("tip_phone").innerHTML="<font color='green'>✔两次密码相同</font>";
+        }
+        else {
+            document.getElementById("tip_phone").innerHTML="✘两次密码不相同";
+            document.getElementById("tip_phone").style.color="red";
+            document.getElementById("submit_phone").disabled = true;
+        //document.getElementById("tip_phone").innerHTML="<font color='red'>✘两次密码不相同</font>";        
+        }
+    }
+    function validatePWD_mail(){
+        var pwd1 = document.getElementById("newPWD_mail").value;
+        var pwd2 = document.getElementById("renewPWD_mail").value;
+        if(pwd1 == pwd2) {
+            document.getElementById("tip_mail").innerHTML="✔两次密码相同";
+            document.getElementById("tip_mail").style.color="green";
+            document.getElementById("submit_mail").disabled = false;
+        }
+        else {
+            document.getElementById("tip_mail").innerHTML="✘两次密码不相同";
+            document.getElementById("tip_mail").style.color="red";
+            document.getElementById("submit_mail").disabled = true;
+        }
+    }  
+    
+	var InterValObj; //timer变量，控制时间
+    var count = 30; //间隔函数，1秒执行
+    var curCount;//当前剩余秒数
+	function getMessage(){
+    	sendMessage();
+		curCount = count;
+		$("#btn_getMessage").attr("disabled", "true");
+        $("#btn_getMessage").val(curCount + "秒后可重新发送");
+        InterValObj = window.setInterval(SetRemainTime, 1000);
+	}
+    
+	//timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            $("#btn_getMessage").removeAttr("disabled");//启用按钮
+            $("#btn_getMessage").val("重新发送验证码");
+        }
+        else {
+            curCount--;
+            $("#btn_getMessage").val(curCount + "秒后可重新发送"); 
+        }
+    }
+	
+	function sendMessage(){
+		var phone = $("#phone").val();
+		if(phone != ""){
+			$.ajax({
+				url : "/login/sendSMS",  //这里需要修改
+				type : "POST",
+				data:{
+					phone:$("#phone").val()
+				},
+				success:function(data){
+					if(data.code == 0){
+						sms = data.data;
+					}
+					else{
+						layer.msg(data.msg);
+					}
+				},
+				error:function(){
+					layer.closeAll();
+				}
+			})
+		}
+	}
+    
+</script>
+</html>

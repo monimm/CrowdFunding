@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>琦琦众筹</title>
+
+ 
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/bootstrap.min.css}" />
+<script type="text/javascript"
+	th:src="@{/js/bootstrap.min.js}"></script>
+
+
+<link rel="stylesheet" href="/css/uc_spe.css">
+<script src="/js/jquery.min.js"></script>
+
+
+
+
+<script th:inline="javascript">
+	function deleteOrder(id) {
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 1,
+			},
+			url : "/fore/deleteOrder",
+			success : function(data) {
+				$("#orderContainer1").html(data);
+			},
+			complete : function() {
+				$("#uc-order-unpaid-content").show();
+			}
+		});
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 0,
+			},
+			url : "/fore/deleteOrder",
+			success : function(data) {
+				$("#orderContainer0").html(data);
+			},
+			complete : function() {
+				$("#uc-order-all-content").hide();
+			}
+		});
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 2,
+			},
+			url : "/fore/deleteOrder",
+			success : function(data) {
+				$("#orderContainer2").html(data);
+			},
+			complete : function() {
+				$("#uc-order-paid-content").hide();
+			}
+		});
+	}
+
+	function deleteMsg(id) {
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 1,
+			},
+			url : "/sys/deleteMsg",
+			success : function(data) {
+				$("#msgContainer1").html(data);
+			},
+			complete : function() {
+				$("#uc-message-unread-content").hide();
+			}
+		});
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 0,
+			},
+			url : "/sys/deleteMsg",
+			success : function(data) {
+				$("#msgContainer0").html(data);
+			},
+			complete : function() {
+				$("#uc-message-all-content").hide();
+			}
+		});
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 2,
+			},
+			url : "/sys/deleteMsg",
+			success : function(data) {
+				$("#msgContainer2").html(data);
+			},
+			complete : function() {
+				$("#uc-message-read-content").show();
+			}
+		});
+	}
+
+	function updateMsg(id) {
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 1,
+			},
+			url : "/sys/updateMsg",
+			success : function(data) {
+				$("#msgContainer1").html(data);
+			},
+			complete : function() {
+				$("#uc-message-unread-content").show();
+			}
+		});
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 0,
+			},
+			url : "/sys/updateMsg",
+			success : function(data) {
+				$("#msgContainer0").html(data);
+			},
+			complete : function() {
+				$("#uc-message-all-content").hide();
+			}
+		});
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 2,
+			},
+			url : "/sys/updateMsg",
+			success : function(data) {
+				$("#msgContainer2").html(data);
+			},
+			complete : function() {
+				$("#uc-message-read-content").hide();
+			}
+		});
+	}
+
+	//异步更新项目信息
+	function updateProject(id, state) {
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 1,
+				state : state,
+			},
+			url : "/pro/fore/updateState",
+			success : function(data) {
+				$("#projectContainer1").html(data);
+			},
+			complete : function() {
+				$("#uc-project-unfin-content").show();
+			}
+		});
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 0,
+				state : state,
+			},
+			url : "/pro/fore/updateState",
+			success : function(data) {
+				$("#projectContainer0").html(data);
+			},
+			complete : function() {
+				$("#uc-project-all-content").hide();
+			}
+		});
+		$.ajax({
+			type : "POST",
+			data : {
+				id : id,
+				type : 2,
+				state : state,
+			},
+			url : "/pro/fore/updateState",
+			success : function(data) {
+				$("#projectContainer2").html(data);
+			},
+			complete : function() {
+				$("#uc-project-fin-content").hide();
+			}
+		});
+
+	}
+</script>
+</head>
+<body>
+	<!-- 导航栏 -->
+	<nav class="navbar navbar-default navbar-fixed-top ">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li id="uc-backhome"><a href="/fore/index" class = "toIndex">QAQ CROWDFUNDING</a></li>
+				</ul>
+				<ul id="non_loggedin" class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"><img src="/img/3.jpeg" /> <span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li id="uc-userlogout"><a href="">退出</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- 主体内容 -->
+	<div class="container">
+		<div class="row">
+			<!-- 左侧菜单 -->
+			<div class="col-md-3 uc-tab">
+				<ul>
+					<li id="uc-user" class="nav-active">个人信息</li>
+					<li id="uc-account">账户详情</li>
+					<li id="uc-order">我的订单</li>
+					<li id="uc-project">我的发起</li>
+					<li id="uc-message">我的消息</li>
+					<li id="uc-set">我的设置</li>
+				</ul>
+			</div>
+			<!-- 右侧内容 -->
+			<div class="col-md-9 uc-content">
+ 
+				<!-- 右侧顶部个人基本信息 -->
+				<div class="uc-content-header row">
+					<div class="col-md-4">
+						<div class="uc-header-content">
+							<img src="/img/3.jpeg" />
+						</div>
+						<!-- <div>
+							<a id="uc-myusername" th:text="${user.username}">#用户名</a>
+						</div> -->
+					</div>
+					<div class="col-md-4">
+						<div class="uc-header-content uc-header-num"
+							th:text="'￥'+${user.money}">100.00</div>
+						<div>
+							<a id="uc-mybalance">我的余额</a>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="uc-header-content uc-header-num"  th:text = "${user.username}" >12</div>
+						<div>
+							<a id="uc-mymessage">我的消息</a>
+						</div>
+					</div>
+				</div>
+				<!-- 右侧主体-个人资料 -->
+				<div id="uc-content-user" class="uc-content-main">
+					<div class="uc-user-content">
+						<div class="uc-user-content-item">
+							<div class="uc-user-item-header">用户名：</div>
+							<div class="uc-user-item-content" th:text="${user.username}">#用户名</div>
+							<!-- 修改用户名 -->
+							<div class="uc-user-item-content">
+								<a href="JavaScript:void(0)" onclick="uc_openDialogResetname()">修改</a>
+								<div id="uc-dialog-resetname" class="uc-dialog">
+									<div class="uc-dialog-header">
+										<h3>修改用户名</h3>
+									</div>
+									<div class="uc-dialog-backicon">
+										<a onclick="uc_closeDialogResetname()"><img
+											src="/img/close.png" width="25px" height="25px" /></a>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">用户名:</div>
+										<div class="uc-dialog-item-content">
+											<input type="text" class="input" />
+										</div>
+									</div>
+									<div class="uc-dialog-submit">
+										<button href="javascript:void(0)"
+											onclick="uc_closeDialogResetname()">确认修改</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="uc-user-content-item">
+							<div class="uc-user-item-header">手机号：</div>
+							<div class="uc-user-item-content" th:text="${user.phone}">#手机号</div>
+							<!-- 绑定手机 -->
+							<div class="uc-user-item-content" style="width: 50px;">
+								<a href="JavaScript:void(0)" onclick="uc_openDialogBindphone()">绑定</a>
+								<div id="uc-dialog-bindphone" class="uc-dialog">
+									<div class="uc-dialog-header">
+										<h3>绑定手机</h3>
+									</div>
+									<div class="uc-dialog-backicon">
+										<a onclick="uc_closeDialogBindphone()"><img
+											src="/img/close.png" width="25px" height="25px" /></a>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">手机号:</div>
+										<div class="uc-dialog-item-content">
+											<input type="text" class="input" />
+										</div>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">验证码：</div>
+										<div class="uc-dialog-item-content">
+											<input type="text" class="input" /> <input type="button"
+												class="child" value="获取验证码" />
+										</div>
+									</div>
+									<div class="uc-dialog-submit">
+										<button href="javascript:void(0)"
+											onclick="uc_closeDialogBindphone()">确认绑定</button>
+									</div>
+								</div>
+							</div>
+							<!-- 解绑手机 -->
+							<div class="uc-user-item-content" style="width: 50px;">
+								<a href="JavaScript:void(0)"
+									onclick="uc_openDialogUnbindphone()">解绑</a>
+								<div id="uc-dialog-unbindphone" class="uc-dialog">
+									<div class="uc-dialog-header">
+										<h3>解绑手机</h3>
+									</div>
+									<div class="uc-dialog-backicon">
+										<a onclick="uc_closeDialogUnbindphone()"><img
+											src="/img/close.png" width="25px" height="25px" /></a>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">手机号:</div>
+										<div class="uc-dialog-item-content">#手机号</div>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">验证码：</div>
+										<div class="uc-dialog-item-content">
+											<input type="text" class="input" /> <input type="button"
+												class="child" value="获取验证码" />
+										</div>
+									</div>
+									<div class="uc-dialog-submit">
+										<button href="javascript:void(0)"
+											onclick="uc_closeDialogUnbindphone()">确认解绑</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="uc-user-content-item">
+							<div class="uc-user-item-header">邮箱：</div>
+							<div class="uc-user-item-content" th:text="${user.mail}">#邮箱</div>
+							<!-- 绑定邮箱 -->
+							<div class="uc-user-item-content" style="width: 50px;">
+								<a href="JavaScript:void(0)" onclick="uc_openDialogBindemail()">绑定</a>
+								<div id="uc-dialog-bindemail" class="uc-dialog">
+									<div class="uc-dialog-header">
+										<h3>绑定邮箱</h3>
+									</div>
+									<div class="uc-dialog-backicon">
+										<a onclick="uc_closeDialogBindemail()"><img
+											src="/img/close.png" width="25px" height="25px" /></a>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">邮箱:</div>
+										<div class="uc-dialog-item-content">
+											<input type="text" class="input" />
+										</div>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">验证码：</div>
+										<div class="uc-dialog-item-content">
+											<input type="text" class="input" /> <input type="button"
+												class="child" value="获取验证码" />
+										</div>
+									</div>
+									<div class="uc-dialog-submit">
+										<button href="javascript:void(0)"
+											onclick="uc_closeDialogBindemail()">确认绑定</button>
+									</div>
+								</div>
+							</div>
+							<!-- 解绑邮箱 -->
+							<div class="uc-user-item-content" style="width: 50px;">
+								<a href="JavaScript:void(0)"
+									onclick="uc_openDialogUnbindemail()">解绑</a>
+								<div id="uc-dialog-unbindemail" class="uc-dialog">
+									<div class="uc-dialog-header">
+										<h3>解绑邮箱</h3>
+									</div>
+									<div class="uc-dialog-backicon">
+										<a onclick="uc_closeDialogUnbindemail()"><img
+											src="/img/close.png" width="25px" height="25px" /></a>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">邮箱:</div>
+										<div class="uc-dialog-item-content">#邮箱</div>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">验证码：</div>
+										<div class="uc-dialog-item-content">
+											<input type="text" class="input" /> <input type="button"
+												class="child" value="获取验证码" />
+										</div>
+									</div>
+									<div class="uc-dialog-submit">
+										<button href="javascript:void(0)"
+											onclick="uc_closeDialogUnbindemail()">确认解绑</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="uc-user-content-item">
+							<div class="uc-user-item-header">密码：</div>
+							<div class="uc-user-item-content">*********</div>
+							<!-- 修改密码 -->
+							<div class="uc-user-item-content">
+								<a href="JavaScript:void(0)" onclick="uc_openDialogResetkey()">修改</a>
+								<div id="uc-dialog-resetkey" class="uc-dialog">
+									<div class="uc-dialog-header">
+										<h3>修改密码</h3>
+									</div>
+									<div class="uc-dialog-backicon">
+										<a onclick="uc_closeDialogResetkey()"><img
+											src="/img/close.png" width="25px" height="25px" /></a>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">新密码:</div>
+										<div class="uc-dialog-item-content">
+											<input type="text" class="input" />
+										</div>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">确认新密码:</div>
+										<div class="uc-dialog-item-content">
+											<input type="text" class="input" />
+										</div>
+									</div>
+									<div class="uc-dialog-submit">
+										<button href="javascript:void(0)"
+											onclick="uc_closeDialogResetkey()">确认修改</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="uc-user-content-item">
+							<div class="uc-user-item-header">头像：</div>
+							<div class="uc-user-item-content">
+								<img src="" />
+							</div>
+							<!-- 修改头像 -->
+							<div id="uc-reset-profile-btn" class="uc-user-item-content">
+								<a href="JavaScript:void(0)"
+									onclick="uc_openDialogResetprofile()">修改</a>
+								<div id="uc-dialog-resetprofile" class="uc-dialog">
+									<div class="uc-dialog-header">
+										<h3>修改头像</h3>
+									</div>
+									<div class="uc-dialog-backicon">
+										<a onclick="uc_closeDialogResetprofile()"><img
+											src="/img/close.png" width="25px" height="25px" /></a>
+									</div>
+									<div class="uc-dialog-item">
+										<div class="uc-dialog-item-header">选择新头像:</div>
+										<div class="uc-dialog-item-content">
+											<a class="file">选择图片<input type="file" class="input" /></a>
+										</div>
+									</div>
+									<div class="uc-dialog-submit">
+										<button href="javascript:void(0)"
+											onclick="uc_closeDialogResetprofile()">确认修改</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 右侧主体-账户详情 -->
+				<div id="uc-content-account" class="uc-content-main">
+					<!-- 账户详情顶部菜单 -->
+					<div class="uc-content-content-header">
+						<ul>
+							<li id="uc-account-balance">我的余额</li>
+							<li id="uc-account-transaction">交易记录</li>
+						</ul>
+					</div>
+					<!-- 我的余额 -->
+					<div id="uc-account-balance-content" class="uc-content-content">
+						<div class="balance-detail" th:text = "'￥'+${user.money}">100.00</div>
+						<!-- 充值 -->
+						<div class="balance-operate">
+							<a id="btn-topup" href="JavaScript:void(0)"
+								onclick="uc_openDialogTopup()">充值</a>
+							<div id="uc-dialog-topup" class="uc-dialog">
+								<div class="uc-dialog-header">
+									<h3>充值</h3>
+								</div>
+								<div class="uc-dialog-backicon">
+									<a onclick="uc_closeDialogTopup()"><img src="/img/close.png"
+										width="25px" height="25px" /></a>
+								</div>
+								<div class="uc-dialog-item">
+									<div class="uc-dialog-item-header">金额:</div>
+									<div class="uc-dialog-item-content">
+										<input type="number" class="input" />
+									</div>
+								</div>
+								<div class="uc-dialog-item">
+									<div>充值方式：</div>
+									<div class="uc-dialog-item-content">
+										<label><input type="radio" class="check"
+											name="uc-topup-method" checked="checked" />支付宝</label> <label><input
+											type="radio" class="check" name="uc-topup-method" />微信</label>
+									</div>
+								</div>
+								<div class="uc-dialog-submit">
+									<button href="javascript:void(0)"
+										onclick="uc_closeDialogTopup()">确认充值</button>
+								</div>
+							</div>
+						</div>
+						<!-- 提现 -->
+						<div class="balance-operate">
+							<a id="btn-withdraw" href="JavaScript:void(0)"
+								onclick="uc_openDialogWithdraw()">提现</a>
+							<div id="uc-dialog-withdraw" class="uc-dialog">
+								<div class="uc-dialog-header">
+									<h3>提现</h3>
+								</div>
+								<div class="uc-dialog-backicon">
+									<a onclick="uc_closeDialogWithdraw()"><img
+										src="/img/close.png" width="25px" height="25px" /></a>
+								</div>
+								<div class="uc-dialog-item">
+									<div class="uc-dialog-item-header">金额:</div>
+									<div class="uc-dialog-item-content">
+										<input type="number" class="input" />
+									</div>
+								</div>
+								<div class="uc-dialog-item">
+									<div>提现方式：</div>
+									<div class="uc-dialog-item-content">
+										<label><input type="radio" class="check"
+											name="uc-withdraw" checked="checked" />支付宝</label> <label><input
+											type="radio" class="check" name="uc-withdraw" />微信</label>
+									</div>
+								</div>
+								<div class="uc-dialog-submit">
+									<button href="javascript:void(0)"
+										onclick="uc_closeDialogWithdraw()">确认充值</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 交易记录 -->
+					<div id="uc-account-transaction-content" class="uc-content-content">
+						<table>
+							<colgroup>
+								<col width="25%" />
+								<col width="60%" />
+								<col width="15%" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th>时间</th>
+									<th>交易详情</th>
+									<th>交易金额</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="trade : ${trades}">
+									<th th:text="${trade.time}"></th>
+									<th th:text="${trade.info}"></th>
+									<th th:text="${trade.money}"></th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+	
+			<!-- 右侧主体-我的订单 -->
+			<div id="uc-content-order" class="uc-content-main">
+				<!-- 我的订单顶部菜单 -->
+				<div class="uc-content-content-header">
+					<ul>
+						<li id="uc-order-all">全部订单</li>
+						<li id="uc-order-unpaid">未支付</li>
+						<li id="uc-order-paid">已支付</li>
+					</ul>
+				</div>
+
+				<div id="orderContainer0">
+					<div th:replace="/fore/order/order_frg::frg0"></div>
+				</div>
+				<div id="orderContainer1">
+					<div th:replace="/fore/order/order_frg::frg1"></div>
+				</div>
+				<div id="orderContainer2">
+					<div th:replace="/fore/order/order_frg::frg2"></div>
+				</div>
+			</div>
+			<!-- 右侧主体-我的发起 -->
+			<div id="uc-content-project" class="uc-content-main">
+				<!-- 我的发起顶部菜单 -->
+				<div class="uc-content-content-header">
+					<ul>
+						<li id="uc-project-all">全部项目</li>
+						<li id="uc-project-unfin">未完成</li>
+						<li id="uc-project-fin">已完成</li>
+					</ul>
+				</div>
+
+				<div id="projectContainer0">
+					<div th:replace="/fore/pro/pro_frg::frg0"></div>
+				</div>
+				<div id="projectContainer1">
+					<div th:replace="/fore/pro/pro_frg::frg1"></div>
+				</div>
+				<div id="projectContainer2">
+					<div th:replace="/fore/pro/pro_frg::frg2"></div>
+				</div>
+
+			</div>
+			<!-- 右侧主体-个人消息 -->
+			<div id="uc-content-message" class="uc-content-main">
+				<!-- 个人消息顶部菜单 -->
+				<div class="uc-content-content-header">
+					<ul>
+						<li id="uc-message-all">全部消息</li>
+						<li id="uc-message-unread">未读消息</li>
+						<li id="uc-message-read">已读消息</li>
+					</ul>
+				</div>
+				<div id="msgContainer0">
+					<div th:replace="/fore/pro/msg_frg::frg0"></div>
+				</div>
+				<div id="msgContainer1">
+					<div th:replace="/fore/pro/msg_frg::frg1"></div>
+				</div>
+				<div id="msgContainer2">
+					<div th:replace="/fore/pro/msg_frg::frg2"></div>
+				</div>
+			</div>
+			<!-- 右侧主体-设置 -->
+			<div id="uc-content-set" class="uc-content-main"></div>
+		</div>
+	</div>
+
+		</div>
+
+
+	<div style="height: 3000px"></div>
+	<a href="#uc-account-balance">aaaa</a>
+
+
+
+	<script src="/js/uc_spe.js"></script>
+</body>
+</html>

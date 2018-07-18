@@ -1,0 +1,626 @@
+body {
+	--color-text: #fff;
+	--color-link: #f0f0f0;
+	--color-link-hover: #fff;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+	min-height: 2000px;
+	width: 100%;
+	min-width: 1400px;
+	color: #fff;
+	color: var(--color-text);
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+
+.detail-content{
+	--color-text: #fff;
+	--color-link: #f0f0f0;
+	--color-link-hover: #fff;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+	min-height: 6000px;
+	width: 1903px;
+	min-width: 1903px;
+	color: #fff;
+	color: var(--color-text);
+	background: linear-gradient(115deg, rgb(105, 253, 233) 5%,rgb(131, 94, 255) 95%);
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+    vertical-align: baseline;
+    text-align: center;
+}
+
+.detail-content-title{
+    color: black;
+    width: 1250px;
+    height: 100px;
+    margin: 0 325px 0 325px;
+    line-height: 100px;
+    position: absolute;
+    font-size: 30px;
+    text-align: center;
+    top: 130px;
+    transition:800ms ease all;
+    border-radius: 25px;
+}
+.detail-content-title:hover{
+	background-color: #ffffff;
+    color: black;
+    font-size: 40px;
+}
+
+
+.detail-content-coverandothers{
+    width: 1200px;
+    height: 600px;
+    margin-left: 350px;
+    margin-right: 350px;
+    background-color: white;
+    position: absolute;
+    top: 250px;
+    color: #000000;
+}
+
+.detail-content-images{
+    border: 4px solid black;
+    width: 1200px;
+    height: 600px;
+    margin: 0 350px 0 350px;
+    position: absolute;
+    top: 900px;
+}
+
+
+
+.detail-content-coverimage{
+    width: 780px;
+    height: 600px;
+    padding: 20px 0 20px 20px;
+    float: left;
+}
+
+.detail-content-coverimage-cover{
+    width: 100%;
+    height: 100%;
+}
+
+.detail-content-others{
+    width: 420px;
+    height: 600px;
+    float: left;
+    padding-top: 50px;
+}
+
+.detail-content-others-state{
+    width: 133px;
+    height:100px;
+    color: rgb(160, 160, 160);
+    text-align: center;
+    font-size: 15px;
+    float: left;
+    line-height: 100px;
+}
+
+.detail-content-others-state-value{
+    width: 133px;
+    height:50px;
+    color: red;
+    text-align: center;
+    font-size: 30px;
+    float: left;
+}
+
+
+.detail-content-others-days{
+    width: 133px;
+    height: 100px;
+    color: rgb(160, 160, 160);
+    text-align: center;
+    font-size: 15px;
+    float: left;
+    line-height: 100px;
+}
+
+.detail-content-others-days-value{
+    width: 133px;
+    height: 50px;
+    color: red;
+    text-align: center;
+    font-size: 25px;
+    line-height: 25px;
+    float: left;
+}
+
+.detail-content-others-moneys{
+    width: 133px;
+    height: 100px;
+    color: rgb(160, 160, 160);
+    text-align: center;
+    font-size: 15px;
+    float: left;
+    line-height: 100px;
+}
+
+.detail-content-others-moneys-value{
+    width: 133px;
+    height: 50px;
+    color: red;
+    font-size: 30px;
+    text-align: center;
+    float: left;
+}
+
+
+.detail-content-others-subscribe{
+    width: 100%;
+    height: 100px;
+    padding: 0 20px 0 20px;
+    margin: 50px 0 0 0;
+    text-align:center;
+}
+
+
+.button_su_inner_subscribe{
+	display: inline-block;
+	background: rgb(211, 230, 252);
+	color: rgb(0, 0, 0);
+	font-size: 20px;
+	font-weight: normal;
+	width: 200px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	border-radius: 3px;
+	transition: 400ms;
+	text-decoration: none;
+  }
+
+  .button_su_subscribe{
+	overflow: hidden;
+	position: relative;
+	display: inline-block;
+	border-radius: 3px;
+	float: right;
+  }
+
+  .probootstrap-nav_subscribe {
+	margin-top: 30px;
+	margin-right: 110px;
+    float: right;
+}
+
+
+.detail-content-textareas{
+
+    width: 1200px;
+    margin: 0 350px 0 350px;
+    height: auto;
+    position: absolute;
+    top: 1550px;
+}
+
+
+.detail-content-textareas-titles{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    text-align: center;
+    padding: 0 10% 0 10%;
+    font-size: 30px;
+    line-height: 60px;
+    color: black;
+    border-bottom: 3px solid black;
+    border-radius: 20px;
+    transition: 800ms;
+}
+.detail-content-textareas-titles:hover{
+    background-color: #000000;
+    color: white;
+}
+
+.detail-content-textareas-content{
+    color: black;
+    text-align: left;
+    padding: 30px 200px 30px 200px;
+    white-space:normal;
+    word-break:break-all;
+    word-wrap:break-word;
+    text-indent: 2em;
+    line-height: 30px;
+    font-size: 17px;
+}
+
+.detail-content-textareas-comments{
+    color: #000000;
+    width: 1100px;
+    margin: 10px 50px 10px 50px;
+    height: auto;
+}
+
+.detail-content-textareas-comments-comment{
+    width: 100%;
+    height: 150px;;
+    background-color: #f0f0f0;
+    text-align: center;
+    border-bottom: 3px solid black;
+    border-radius: 20px;
+    transition: 800ms;
+}
+.detail-content-textareas-comments-comment:hover{
+    background-color: #000000;
+    color: white;
+}
+
+.comment-head{
+    width: 150px;
+    height: 150px;
+    border-right: 3px solid black;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    float: left;
+}
+
+.comment-head-image{
+    width: 150px;
+    height: 110px;
+    padding: 10px 25px 0 25px;
+}
+
+.comment-name{
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 15px;
+}
+
+.comment-content{
+    width: 700px;
+    height: 150px;
+    float: left;
+    text-align: left;
+    text-indent: 2em;
+    padding: 20px 100px 20px 100px;
+    display: table;
+}
+
+
+.comment-content-content{
+    width: 500px;
+    height: 110px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+.comment-time{
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    font-size: 20px;
+    float: left;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+}
+
+.comment-level{
+    width: 100px;
+    height: 150px;
+    line-height: 150px;
+    font-size: 20px;
+    float: left;
+}
+.small-introductions-buttons{
+    width: 100%;
+    height: auto;
+    margin: 10px 0 10px 0;
+    text-align: center;
+}
+
+.detail-content-input{
+    width: 1200px;
+    height: 50px;
+    padding-left: 200px;
+    padding-right: 200px;
+    margin-bottom: 20px;
+
+}
+
+.detail-content-input-input{
+    width: 700px;
+    height: 50px;
+    float: left;
+    border: 2px solid black;
+    color: #000000;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+
+.detail-content-input-button{
+    width: 100px;
+    height: 50px;
+    float: left;
+    color: #000000;
+    line-height: 46px;
+    font-size: 18px;
+    text-align: center;
+    background: #c0bfbf;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    transition: 800ms;
+}
+.detail-content-input-button:hover{
+    color: #fff;
+    background: #000000;
+}
+
+.detail-content-textareas-supports{
+    width: 1080px;
+    margin: 10px 60px 10px 60px;
+    height: auto;
+    color: #000000;
+}
+
+.detail-content-textareas-supports-support{
+    width: 340px;
+    margin: 5px 10px 5px 10px;
+    height: 60px;
+    float: left;
+    border-radius: 10px;
+    border-bottom: 3px solid black;
+    transition: 400ms;
+    font-size: 20PX;
+}
+.detail-content-textareas-supports-support:hover{
+    color: #fff;
+    background: black;
+}
+
+.support-name{
+    width: 113px;
+    height: 57px;
+    float: left;
+    text-align: center;
+    line-height: 57px;
+}
+
+.support-amount{
+    width: 113px;
+    height: 57px;
+    float: left;
+    text-align: center;
+    line-height: 57px;
+}
+.support-date{
+    width: 113px;
+    height: 57px;
+    float: left;
+    text-align: center;
+    line-height: 57px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*这里是支付模块*/
+
+
+.detail-pay{
+    display: none;
+    width: 600px;
+    height: 500px;
+    position: fixed;
+    top: 200px;
+    left: 650px;
+    background: #fff;
+    z-index: 10;
+    border: 1px solid black;
+}
+
+
+.detail-pay-titleandexit{
+    width: 600px;
+    height: 80px;
+    float: left;
+    background: rgb(0, 0, 0);
+    color: #fff;
+    text-align: center;
+    line-height: 80px;
+    font-size: 30px;
+}
+
+.detail-pay-exit{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    transition: 400ms;
+}
+.detail-pay-exit:hover{
+    width: 60px;
+    height: 60px;
+    top: 10px;
+    right: 10px;
+}
+
+.detail-pay-moneyinput{
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    top: 150px;
+    margin: 0 150px 0 150px;
+}
+
+.detail-pay-money-title{
+    width: 100%;
+    height: 50px;
+    padding: 0 20px 0 20px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+}
+
+
+.detail-pay-money-input{
+    width: 100%;
+    height: 50px;
+    border-radius: 20px;
+    border: 2px solid black;
+    padding: 0 20px 0 20px;
+    outline: none;
+    font-size: 20px;
+    text-align: center;
+}
+
+.detail-pay-ways{
+    width: 540px;
+    height: 50px;
+    position: absolute;
+    top: 300px;
+    margin: 0 30px 0 30px;
+}
+
+.detail-pay-way{
+    width: 160px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 50px;
+    float: left;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+
+.detail-pay-way-logo{
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    float: left;
+}
+.detail-pay-way-name{
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    float: left;
+}
+
+.detail-pay-ensure{
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    top: 350px;
+    margin: 50px 200px 0 200px;
+    text-align: center;
+    line-height: 46px;
+    font-size: 20px;
+    transition: 400ms;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+.detail-pay-ensure:hover{
+    background: black;
+    color: white;
+}
+
+/*这里是支付模块*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.xuanfu-button{
+    background:rgb(235, 235, 235);
+    color:rgb(180, 180, 180);
+    border:none;
+    position:relative;
+    width:600px;
+    height:60px;
+    font-size:1.6em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+    margin-top: 10px;
+  }
+  .xuanfu-button:hover{
+	background: white;
+    color:rgb(57, 120, 255);
+  }
+  .xuanfu-button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: rgb(57, 120, 255);
+    transition:400ms ease all;
+
+  }
+  .xuanfu-button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+
+  }
+  .xuanfu-button:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+
