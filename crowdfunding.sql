@@ -16,9 +16,9 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 set names utf8;
-drop database if exit `cf`;
-create database if not exits `cf`;
-use `cf`;
+drop database if exit `crowdfunding`;
+create database if not exits `crowdfunding`;
+use `crowdfunding`;
 
 --
 -- Table structure for table `advice`
