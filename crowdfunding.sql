@@ -15,6 +15,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+set names utf8;
+drop database if exit `cf`;
+create database if not exits `cf`;
+use `cf`;
+
 --
 -- Table structure for table `advice`
 --
