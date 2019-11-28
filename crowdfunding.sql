@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 set names utf8;
-drop database if exit `crowdfunding`;
+drop database if exits `crowdfunding`;
 create database if not exits `crowdfunding`;
 use `crowdfunding`;
 
